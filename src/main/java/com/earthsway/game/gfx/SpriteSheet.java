@@ -4,12 +4,11 @@ import com.earthsway.utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class SpriteSheet {
     public String path;
     public int width;
-    public int hight;
+    public int height;
 
     public int[] pixels;
 
@@ -26,9 +25,9 @@ public class SpriteSheet {
 
         this.path = path;
         this.width = image.getWidth();
-        this.hight = image.getHeight();
+        this.height = image.getHeight();
 
-        pixels = image.getRGB(0,0,width,hight, null, 0, width);
+        pixels = image.getRGB(0,0,width, height, null, 0, width);
 
         for (int i = 0; i < pixels.length; i++){
             pixels[i] = (pixels[i] & 0xFF)/64;

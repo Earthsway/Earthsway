@@ -22,8 +22,10 @@ public class Main extends Canvas implements Runnable{
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+    private int[] colours = new int[6*6*6];
 
     private Screen screen;
+    public InputHandler input;
 
     public Main(){
         setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -44,7 +46,21 @@ public class Main extends Canvas implements Runnable{
     }
 
     public void init(){
+        int index = 0;
+        for(int r = 0; r<6;r++) {
+            for (int g = 0; g < 6; g++) {
+                for (int b = 0; b < 6; b++) {
+                    int rr = (r*255/5);
+                    int gg = (g*255/5);
+                    int bb = (b*255/5);
+
+                    colours[index++] = rr << 16 | gg << 8 | bb;
+                }
+            }
+        }
+
         screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
+        input = new InputHandler(this);
     }
 
     private synchronized void start(){
@@ -104,9 +120,10 @@ public class Main extends Canvas implements Runnable{
     public void tick(){
         tickCount++;
 
-        for(int i = 0; i< pixels.length; i++){
-            pixels[i] = i + tickCount;
-        }
+        if(input.up.isPressed()) screen.yOffset--;
+        if(input.down.isPressed()) screen.yOffset++;
+        if(input.left.isPressed()) screen.xOffset--;
+        if(input.right.isPressed()) screen.xOffset++;
     }
 
     public void render() {
