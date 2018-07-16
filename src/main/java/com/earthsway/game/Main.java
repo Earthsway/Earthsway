@@ -1,6 +1,7 @@
 package com.earthsway.game;
 
 import com.earthsway.game.gfx.Screen;
+import com.earthsway.game.gfx.SpriteSheet;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +43,10 @@ public class Main extends Canvas implements Runnable{
         frame.setVisible(true);
     }
 
+    public void init(){
+        screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
+    }
+
     private synchronized void start(){
         running = true;
         new Thread(this).start();
@@ -60,6 +65,8 @@ public class Main extends Canvas implements Runnable{
 
         long lastTimer = System.currentTimeMillis();
         double d = 0;
+
+        init();
 
         while(running){
             long now = System.nanoTime();
@@ -109,10 +116,11 @@ public class Main extends Canvas implements Runnable{
             return;
         }
 
+        screen.render(pixels, 0, WIDTH);
+
         Graphics g = bs.getDrawGraphics();
-
+        g.drawRect(0,0,getWidth(),getHeight());
         g.drawImage(image, 0,0, getWidth(), getHeight(), null);
-
         g.dispose();
         bs.show();
     }
