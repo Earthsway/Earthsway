@@ -1,11 +1,12 @@
 package com.earthsway.game;
 
+import com.earthsway.game.gfx.Screen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.nio.Buffer;
 
 public class Main extends Canvas implements Runnable{
 
@@ -20,6 +21,8 @@ public class Main extends Canvas implements Runnable{
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+    private Screen screen;
 
     public Main(){
         setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
