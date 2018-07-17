@@ -19,6 +19,7 @@ public abstract class Mob extends Entity{
         this.y = y;
         this.speed = speed;
         this.canMoveDiagonal = false;
+        this.scale = 1;
     }
 
     public Mob(Level level, String name, int x, int y, int speed, boolean canMoveDiagonal) {
@@ -28,6 +29,17 @@ public abstract class Mob extends Entity{
         this.y = y;
         this.speed = speed;
         this.canMoveDiagonal = canMoveDiagonal;
+        this.scale = 1;
+    }
+
+    public Mob(Level level, String name, int x, int y, int speed, boolean canMoveDiagonal, int scale) {
+        super(level);
+        this.name = name;
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
+        this.canMoveDiagonal = canMoveDiagonal;
+        this.scale = scale;
     }
 
     public void move(int xa, int ya){

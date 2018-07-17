@@ -107,11 +107,11 @@ public class Main extends Canvas implements Runnable{
                 shouldRender = true;
             }
 
-            try {
+            /*try {
                 Thread.sleep(2);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
 
             if(shouldRender) {
                 frames++;
@@ -135,7 +135,7 @@ public class Main extends Canvas implements Runnable{
     public void render() {
         BufferStrategy bs = getBufferStrategy();
         if(bs == null){
-            createBufferStrategy(3);//The Higher, the more power needed!
+            createBufferStrategy(4);//The Higher, the more power needed! def: 3
             return;
         }
         int xOffset = player.x - (screen.width/2);
