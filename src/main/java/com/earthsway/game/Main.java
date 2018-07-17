@@ -153,7 +153,7 @@ public class Main extends Canvas implements Runnable{
 
         level.renderEntities(screen);
 
-        //Font.render("abcdeft !!21553", screen, screen.xOffset + screen.width/2,screen.yOffset + screen.height/2,Colors.get(-1, -1, -1, 000), true);
+        //Font.render("TEST123test!!!", screen, screen.xOffset + screen.width/2,screen.yOffset + screen.height/2,Colors.get(-1, -1, -1, 000), 1,  true);
 
         for(int y = 0; y<screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {

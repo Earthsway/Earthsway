@@ -44,7 +44,7 @@ public class Player extends Mob{
          * xTile & yTile are used to define the top left tile of the defined sprite.
          */
         int xTile = 0;
-        int yTile = 28;
+        int yTile = 27;
 
         int walkingSpeed = 4;
         int flipTop = (numSteps >> walkingSpeed) & 1;
