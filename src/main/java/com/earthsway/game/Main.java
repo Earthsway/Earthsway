@@ -1,8 +1,11 @@
 package com.earthsway.game;
 
-import com.earthsway.game.gfx.Colours;
+import com.earthsway.game.entities.Player;
+import com.earthsway.game.gfx.Colors;
+import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
+import com.earthsway.game.level.Level;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +16,7 @@ import java.awt.image.DataBufferInt;
 public class Main extends Canvas implements Runnable{
 
     public static final int WIDTH = 160;
-    public static final int HEIGHT = WIDTH/21*9;
+    public static final int HEIGHT = WIDTH/17*9;
     public static final int SCALE = 10;
     public static final String NAME = "Earthsway";
 
@@ -23,10 +26,12 @@ public class Main extends Canvas implements Runnable{
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-    private int[] colours = new int[6*6*6];
+    private int[] colors = new int[6*6*6];
 
     private Screen screen;
     public InputHandler input;
+    public Level level;
+    public Player player;
 
     public Main(){
         setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -55,13 +60,17 @@ public class Main extends Canvas implements Runnable{
                     int gg = (g*255/5);
                     int bb = (b*255/5);
 
-                    colours[index++] = rr << 16 | gg << 8 | bb;
+                    colors[index++] = rr << 16 | gg << 8 | bb;
                 }
             }
         }
 
         screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
         input = new InputHandler(this);
+
+        level = new Level(64,64);
+        player = new Player(level, 0, 0, input);
+        level.addEntity(player);
     }
 
     private synchronized void start(){
@@ -120,11 +129,7 @@ public class Main extends Canvas implements Runnable{
 
     public void tick(){
         tickCount++;
-
-        if(input.up.isPressed()) screen.yOffset--;
-        if(input.down.isPressed()) screen.yOffset++;
-        if(input.left.isPressed()) screen.xOffset--;
-        if(input.right.isPressed()) screen.xOffset++;
+        level.tick();
     }
 
     public void render() {
@@ -133,17 +138,27 @@ public class Main extends Canvas implements Runnable{
             createBufferStrategy(3);//The Higher, the more power needed!
             return;
         }
+        int xOffset = player.x - (screen.width/2);
+        int yOffset = player.y - (screen.height/2);
 
-        for(int y = 0; y<32; y++) {
-            for (int x = 0; x < 32; x++) {
-                screen.render(x<<3, y<<3, 0, Colours.get(555, 500, 050, 005));
+        level.renderTiles(screen,xOffset, yOffset);
+
+        for(int x=0; x<level.width;x++){
+            int color = Colors.get(-1,-1,-1,000);
+            if(x % 10 == 0 && x != 0){
+                color = Colors.get(-1,-1,-1,500);
             }
+            Font.render((x%10)+"", screen, (x*8),0, color);
         }
+
+        level.renderEntities(screen);
+
+        //Font.render("abcdeft !!21553", screen, screen.xOffset + screen.width/2,screen.yOffset + screen.height/2,Colors.get(-1, -1, -1, 000), true);
 
         for(int y = 0; y<screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
-                int colourCode = screen.pixels[x+y * screen.width];
-                if(colourCode < 255) pixels[x+y*WIDTH] = colours[colourCode];
+                int colorCode = screen.pixels[x+y * screen.width];
+                if(colorCode < 255) pixels[x+y*WIDTH] = colors[colorCode];
             }
         }
 
