@@ -143,13 +143,13 @@ public class Main extends Canvas implements Runnable{
 
         level.renderTiles(screen,xOffset, yOffset);
 
-        for(int x=0; x<level.width;x++){
+        /*for(int x=0; x<level.width;x++){
             int color = Colors.get(-1,-1,-1,000);
             if(x % 10 == 0 && x != 0){
                 color = Colors.get(-1,-1,-1,500);
             }
             Font.render((x%10)+"", screen, (x*8),0, color);
-        }
+        }*/
 
         level.renderEntities(screen);
 

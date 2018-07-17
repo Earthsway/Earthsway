@@ -28,10 +28,10 @@ public class Screen {
     }
 
     public void render(int xPos, int yPos, int tile, int color) {
-        render(xPos, yPos, tile, color, 0x00);
+        render(xPos, yPos, tile, color, 0x00, 1);
     }
 
-    public void render(int xPos, int yPos, int tile, int color, int mirrorDir) {
+    public void render(int xPos, int yPos, int tile, int color, int mirrorDir, int scale) {
         xPos -= xOffset;
         yPos -= yOffset;
 

@@ -4,22 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java" line="10" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="14afde40-902b-4011-b90b-06d5cea8c34e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Player.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Font.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BaseTile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/Tile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Colours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprite_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sprite_sheet.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprite_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sprite_sheet.png" afterDir="false" />
-    </list>
+    <list default="true" id="14afde40-902b-4011-b90b-06d5cea8c34e" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -120,7 +105,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
-              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+              <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
               <folding>
                 <element signature="e#1033#1034#0" expanded="true" />
                 <element signature="e#1060#1061#0" expanded="true" />
@@ -363,7 +348,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1531792142839" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1531794889281" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -658,7 +643,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+          <caret line="24" column="21" lean-forward="true" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
           <folding>
             <element signature="e#1033#1034#0" expanded="true" />
             <element signature="e#1060#1061#0" expanded="true" />
