@@ -1,6 +1,7 @@
 package com.earthsway.game.entities;
 
 import com.earthsway.game.level.Level;
+import com.earthsway.game.level.tiles.Tile;
 
 public abstract class Mob extends Entity{
 
@@ -61,6 +62,13 @@ public abstract class Mob extends Entity{
     }
 
     public abstract boolean hasCollided(int xa, int ya);
+
+    protected boolean isSolidTile(int xa, int ya, int x, int y){
+        if(level == null) return false;
+        Tile lastTile = level.getTile((this.x + x) >> 3, (this.y + y) >> 3);
+        Tile newTile = level.getTile((this.x + x + xa) >> 3, (this.y + y + ya) >> 3);
+        return !lastTile.equals(newTile) && newTile.isSolid();
+    }
 
     public String getName() {
         return name;

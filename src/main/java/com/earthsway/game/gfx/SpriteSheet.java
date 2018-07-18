@@ -1,6 +1,6 @@
 package com.earthsway.game.gfx;
 
-import com.earthsway.utilities;
+import com.earthsway.Utilities;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -18,7 +18,7 @@ public class SpriteSheet {
             image = ImageIO.read(SpriteSheet.class.getResourceAsStream(path));
         } catch (Exception e) {
             e.printStackTrace();
-            utilities.errorReport(e, getClass());
+            Utilities.errorReport(e, getClass());
         }
 
         if(image == null) return;
