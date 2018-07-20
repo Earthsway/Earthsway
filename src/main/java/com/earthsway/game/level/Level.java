@@ -2,6 +2,7 @@ package com.earthsway.game.level;
 
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Entity;
+import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.tiles.Tile;
 
@@ -18,7 +19,7 @@ public class Level {
     private byte[] tiles;
     public int width;
     public int height;
-    public List<Entity> entities = new ArrayList<Entity>();
+    private List<Entity> entities = new ArrayList<Entity>();
 
     private BufferedImage image;
     private String imagePath;
@@ -88,8 +89,12 @@ public class Level {
         }
     }
 
+    public synchronized List<Entity> getEntities(){
+        return this.entities;
+    }
+    
     public void tick(){
-        for(Entity e : entities){
+        for(Entity e : getEntities()){
             e.tick();
         }
         for(Tile t : Tile.tiles){
@@ -114,7 +119,7 @@ public class Level {
     }
 
     public void renderEntities(Screen screen){
-        for(Entity e : entities){
+        for(Entity e : getEntities()){
             e.render(screen);
         }
     }
@@ -125,7 +130,37 @@ public class Level {
     }
 
     public void addEntity(Entity entity){
-        this.entities.add(entity);
+        this.getEntities().add(entity);
+    }
+
+    public void removePlayerMP(String username) {
+        int index = 0;
+        for(Entity e : getEntities()){
+            if(e instanceof PlayerMP && ((PlayerMP) e).getUsername().equals(username)){
+                break;
+            }
+            index++;
+        }
+        this.getEntities().remove(index);
+    }
+
+    private int getPlayerMPIndex(String username){
+        int index = 0;
+        for(Entity e : getEntities()){
+            if(e instanceof PlayerMP && ((PlayerMP) e).getUsername().equals(username)) break;
+            index++;
+        }
+        return index;
+    }
+
+    public void movePlayer(String username, int x, int y, int numSteps, boolean isMoving, int movingDir){
+        int index = getPlayerMPIndex(username);
+        PlayerMP player = (PlayerMP) this.getEntities().get(index);
+        player.x = x;
+        player.y = y;
+        player.setMoving(isMoving);
+        player.setNumSteps(numSteps);
+        player.setMovingDir(movingDir);
     }
 
 }

@@ -1,12 +1,14 @@
 package com.earthsway.game.entities;
 
 import com.earthsway.game.InputHandler;
+import com.earthsway.game.Main;
 import com.earthsway.game.entities.utilities.MovingDirection;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.level.tiles.Tile;
+import com.earthsway.game.net.packets.Packet02Move;
 
 import java.awt.*;
 
@@ -37,15 +39,18 @@ public class Player extends Mob{
     public void tick() {
         int xa = 0;
         int ya = 0;
-
-        if(input.up.isPressed()) ya--;
-        if(input.down.isPressed()) ya++;
-        if(input.left.isPressed()) xa--;
-        if(input.right.isPressed()) xa++;
-
+        if(input != null) {
+            if (input.up.isPressed()) ya--;
+            if (input.down.isPressed()) ya++;
+            if (input.left.isPressed()) xa--;
+            if (input.right.isPressed()) xa++;
+        }
         if(xa != 0 || ya != 0){
             move(xa,ya);
             isMoving = true;
+
+            Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
+            packet.writeData(Main.main.socketClient);
         }else isMoving = false;
         if(level.getTile(this.x >> 3, this.y >> 3).getId() == Tile.WATER.getId()) isSwimming = true;
         if(isSwimming && level.getTile(this.x >> 3, this.y >> 3).getId() != Tile.WATER.getId()) isSwimming = false;
@@ -114,4 +119,7 @@ public class Player extends Mob{
     }
 
     public boolean isSwimming() {return isSwimming;}
+
+    public String getUsername(){return this.username;}
+
 }

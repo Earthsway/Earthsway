@@ -1,6 +1,8 @@
 package com.earthsway.game;
 
+import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
+import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
@@ -22,8 +24,12 @@ public class Main extends Canvas implements Runnable{
     public static final int HEIGHT = WIDTH/17*9;
     public static final int SCALE = 10;
     public static final String NAME = "Earthsway";
+    public static Main main;
+    public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
 
-    private JFrame frame;
+    private Thread thread;
+
+    public JFrame frame;
     public boolean running = false;
     public int tickCount = 0;
 
@@ -33,31 +39,17 @@ public class Main extends Canvas implements Runnable{
 
     private Screen screen;
     public InputHandler input;
+    public WindowHandler windowHandler;
     public Level level;
     public Player player;
 
-    private GameClient socketClient;
-    private GameServer socketServer;
+    public GameClient socketClient;
+    public GameServer socketServer;
 
-    public Main(){
-        setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-        setMaximumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-        setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
-
-        frame = new JFrame(NAME);
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
-
-        frame.add(this, BorderLayout.CENTER);
-        frame.pack();
-
-        frame.setResizable(false);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+    public boolean debugMode;
 
     public void init(){
+        main = this;
         int index = 0;
         for(int r = 0; r<6;r++) {
             for (int g = 0; g < 6; g++) {
@@ -75,28 +67,37 @@ public class Main extends Canvas implements Runnable{
         input = new InputHandler(this);
 
         level = new Level("/levels/small_test_level.png");
-        /*player = new Player(level, 0, 0, input, JOptionPane.showInputDialog(this, "Please Enter A Username"));
+        player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username"), null, -1);
         level.addEntity(player);
-        socketClient.sendData("ping".getBytes());*/
-        Packet00Login loginPacket = new Packet00Login(JOptionPane.showInputDialog(this, "Please Enter A Username"));
+        Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
+        if(socketServer != null){
+            socketServer.addConnection((PlayerMP) player, loginPacket);
+        }
+        //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
     }
 
-    private synchronized void start(){
+    public synchronized void start(){
         running = true;
-        new Thread(this).start();
-
+        thread = new Thread(this, NAME + "_main");
+        thread.start();
         if(JOptionPane.showConfirmDialog(this, "Do you want to run the server?") == 0){
             socketServer = new GameServer(this);
             socketServer.start();
         }
 
-        socketClient = new GameClient(this, "localhost");
+        socketClient = new GameClient(this, "173.73.91.159");
         socketClient.start();
     }
 
-    private synchronized void stop(){
+    public synchronized void stop(){
         running = false;
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            Utilities.errorReport(e, getClass());
+        }
     }
 
     public void run() {
@@ -137,7 +138,7 @@ public class Main extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - lastTimer >= 1000){
                 lastTimer += 1000;
-                frame.setTitle("{" + frames + " frames, " + ticks + " Ticks}");
+                debug(DebugLevel.INFO,"{" + frames + " frames, " + ticks + " Ticks}");
                 frames = 0;
                 ticks = 0;
             }
@@ -186,7 +187,29 @@ public class Main extends Canvas implements Runnable{
         bs.show();
     }
 
-    public static void main(String args[]){
-        new Main().start();
+    public void debug(DebugLevel level, String msg){
+        switch (level){
+            default:
+            case INFO:
+                if(debugMode){
+                    System.out.println("[" + NAME + "][INFO]" + msg);
+                }
+            case WARNING:
+                if(debugMode){
+                    System.out.println("[" + NAME + "][WARNING]" + msg);
+                }
+            case SEVERE:
+                if(debugMode){
+                    System.out.println("[" + NAME + "][SEVERE]" + msg);
+                    this.stop();
+                }
+
+        }
+    }
+
+    public static enum DebugLevel{
+        INFO,
+        WARNING,
+        SEVERE;
     }
 }
