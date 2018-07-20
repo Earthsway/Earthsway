@@ -6,6 +6,9 @@ import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
 import com.earthsway.game.level.Level;
+import com.earthsway.game.net.GameClient;
+import com.earthsway.game.net.GameServer;
+import com.earthsway.game.net.packets.Packet00Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,6 +35,9 @@ public class Main extends Canvas implements Runnable{
     public InputHandler input;
     public Level level;
     public Player player;
+
+    private GameClient socketClient;
+    private GameServer socketServer;
 
     public Main(){
         setMinimumSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
@@ -69,13 +75,24 @@ public class Main extends Canvas implements Runnable{
         input = new InputHandler(this);
 
         level = new Level("/levels/small_test_level.png");
-        player = new Player(level, 0, 0, input);
+        /*player = new Player(level, 0, 0, input, JOptionPane.showInputDialog(this, "Please Enter A Username"));
         level.addEntity(player);
+        socketClient.sendData("ping".getBytes());*/
+        Packet00Login loginPacket = new Packet00Login(JOptionPane.showInputDialog(this, "Please Enter A Username"));
+        loginPacket.writeData(socketClient);
     }
 
     private synchronized void start(){
         running = true;
         new Thread(this).start();
+
+        if(JOptionPane.showConfirmDialog(this, "Do you want to run the server?") == 0){
+            socketServer = new GameServer(this);
+            socketServer.start();
+        }
+
+        socketClient = new GameClient(this, "localhost");
+        socketClient.start();
     }
 
     private synchronized void stop(){
@@ -120,7 +137,7 @@ public class Main extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - lastTimer >= 1000){
                 lastTimer += 1000;
-                System.out.println("{" + frames + " frames, " + ticks + " Ticks}");
+                frame.setTitle("{" + frames + " frames, " + ticks + " Ticks}");
                 frames = 0;
                 ticks = 0;
             }

@@ -3,6 +3,7 @@ package com.earthsway.game.entities;
 import com.earthsway.game.InputHandler;
 import com.earthsway.game.entities.utilities.MovingDirection;
 import com.earthsway.game.gfx.Colors;
+import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.level.tiles.Tile;
@@ -16,18 +17,21 @@ public class Player extends Mob{
     private int scale;
     protected boolean isSwimming = false;
     private int tickCount = 0;
+    private String username;
 
 
-    public Player(Level level, int x, int y, InputHandler input, int scale) {
+    public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
         super(level, "Player", x, y, 1, true, scale);
         this.input = input;
         this.scale = scale;
+        this.username = username;
     }
 
-    public Player(Level level, int x, int y, InputHandler input) {
+    public Player(Level level, int x, int y, InputHandler input, String username) {
         super(level, "Player", x, y, 1, true, 1);
         this.input = input;
         this.scale = 1;
+        this.username = username;
     }
 
     public void tick() {
@@ -73,13 +77,13 @@ public class Player extends Mob{
         if(isSwimming){
             int waterColor;
             yOffset += 4;
-            if(tickCount % 60 < 15) waterColor = Colors.get(-1, -1, 225, -1);
-            else if(15 <= tickCount % 60 && tickCount % 60 < 30) waterColor = Colors.get(-1, 225, 115, -1);
+            if(tickCount % 60 < 15)waterColor = Colors.get(-1, -1, 225, -1);
+            else if(15 <= tickCount % 60 && tickCount % 60 < 30){ waterColor = Colors.get(-1, 225, 115, -1);  yOffset -= 1;}
             else if(30 <= tickCount % 60 && tickCount % 60 < 45) waterColor = Colors.get(-1, 115, -1, 225);
-            else waterColor = Colors.get(-1, 225, 115, -1);
+            else{waterColor = Colors.get(-1, 225, 115, -1); yOffset -= 1;}
 
-            screen.render(xOffset, yOffset + 3, 27 * 32, waterColor, 0x00, 1);
-            screen.render(xOffset + 8, yOffset + 3, 27 * 32, waterColor, 0x01, 1);
+            screen.render(xOffset, yOffset + 3, 26 * 32, waterColor, 0x00, 1);
+            screen.render(xOffset + 8, yOffset + 3, 26 * 32, waterColor, 0x01, 1);
         }
 
         screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
@@ -88,6 +92,10 @@ public class Player extends Mob{
         if(!isSwimming){
         screen.render(xOffset  + (modifier* flipBottom), yOffset + modifier, xTile + (yTile + 1)*32, color, flipBottom, scale);
         screen.render(xOffset + modifier - (modifier* flipBottom), yOffset + modifier, (xTile + 1) + (yTile + 1)*32, color, flipBottom, scale);
+        }
+
+        if(username != null){
+            Font.render(username, screen, xOffset - ((username.length() -1 )/ 2 * 8), yOffset - 10, Colors.get(-1, -1, -1, 555));
         }
     }
 

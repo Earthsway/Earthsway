@@ -32,9 +32,5 @@ public class SpriteSheet {
         for (int i = 0; i < pixels.length; i++){
             pixels[i] = (pixels[i] & 0xFF)/64;
         }
-
-        for(int i=0;i<64;i++){
-            System.out.println(pixels[i]);
-        }
     }
 }
