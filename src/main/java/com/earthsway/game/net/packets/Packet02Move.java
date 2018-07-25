@@ -1,5 +1,6 @@
 package com.earthsway.game.net.packets;
 
+import com.earthsway.game.Main;
 import com.earthsway.game.net.GameClient;
 import com.earthsway.game.net.GameServer;
 
@@ -12,12 +13,18 @@ public class Packet02Move extends Packet{
     public Packet02Move(byte[] data) {
         super(02);
         String[] dataArray = readData(data).split(",");
-        this.username = dataArray[0];
-        this.x = Integer.parseInt(dataArray[1]);
-        this.y = Integer.parseInt(dataArray[2]);
-        this.numSteps = Integer.parseInt(dataArray[3]);
-        this.isMoving = Integer.parseInt(dataArray[4]) == 1;
-        this.movingDir = Integer.parseInt(dataArray[5]);
+        try{
+            this.username = dataArray[0];
+            this.x = Integer.parseInt(dataArray[1]);
+            this.y = Integer.parseInt(dataArray[2]);
+            this.numSteps = Integer.parseInt(dataArray[3]);
+            this.isMoving = Integer.parseInt(dataArray[4]) == 1;
+            this.movingDir = Integer.parseInt(dataArray[5]);
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            Packet01Disconnect packet = new Packet01Disconnect(dataArray[0]);
+            packet.writeData(Main.main.socketClient);
+        }
     }
 
     public Packet02Move(String data, int x, int y, int numSteps, boolean isMoving, int movingDir) {

@@ -48,12 +48,21 @@ public class Player extends Mob{
         if(xa != 0 || ya != 0){
             move(xa,ya);
             isMoving = true;
-
             Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
             packet.writeData(Main.main.socketClient);
         }else isMoving = false;
         if(level.getTile(this.x >> 3, this.y >> 3).getId() == Tile.WATER.getId()) isSwimming = true;
         if(isSwimming && level.getTile(this.x >> 3, this.y >> 3).getId() != Tile.WATER.getId()) isSwimming = false;
+        hitCooldown -= 0.1; //default 0.01
+        if(this.health <= 0){
+            System.out.println("You Have Died");
+            this.x = 100;
+            this.y = 100;
+            Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
+            packet.writeData(Main.main.socketClient);
+            this.health = 100;
+        }
+        healthBar(this.health);
         tickCount++;
     }
 
@@ -104,22 +113,40 @@ public class Player extends Mob{
         }
     }
 
+    final int collisionxMin = 0; //def: 0
+    final int collisionxMax = 6; //def: 7
+    final int collisionyMin = 3; //def: 3
+    final int collisionyMax = 6; //def: 7
+
     public boolean hasCollided(int xa, int ya) {
-        int xMin = 0; //def: 0
-        int xMax = 6; //def: 7
-        int yMin = 3; //def: 3
-        int yMax = 6; //def: 7
-
-        for(int x = xMin; x < xMax; x++){if(isSolidTile(xa,ya,x,yMin)) return true;}
-        for(int x = xMin; x < xMax; x++){if(isSolidTile(xa,ya,x,yMax)) return true;}
-        for(int y = yMin; y < yMax; y++){if(isSolidTile(xa,ya,xMin,y)) return true;}
-        for(int y = yMin; y < yMax; y++){if(isSolidTile(xa,ya,xMax,y)) return true;}
-
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isSolidTile(xa,ya,x,collisionyMin)) return true;}
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isSolidTile(xa,ya,x,collisionyMax)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isSolidTile(xa,ya,collisionxMin,y)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isSolidTile(xa,ya, collisionxMax,y)) return true;}
         return false;
     }
 
+    public boolean damagedSolid(int xa, int ya) {
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isSolidDamagingTile(xa,ya,x,collisionyMin)) return true;}
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isSolidDamagingTile(xa,ya,x,collisionyMax)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isSolidDamagingTile(xa,ya,collisionxMin,y)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isSolidDamagingTile(xa,ya, collisionxMax,y)) return true;}
+        return false;
+    }
+
+    public boolean damaged() {
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isDamagingTile(x,collisionyMin)) return true;}
+        for(int x = collisionxMin; x < collisionxMax; x++){if(isDamagingTile(x,collisionyMax)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isDamagingTile(collisionxMin,y)) return true;}
+        for(int y = collisionyMin; y < collisionyMax; y++){if(isDamagingTile(collisionxMax,y)) return true;}
+        return false;
+    }
+
+    public void healthBar(int health){
+
+    }
+
     public boolean isSwimming() {return isSwimming;}
-
     public String getUsername(){return this.username;}
-
+    public int getHealth() {return this.health;}
 }

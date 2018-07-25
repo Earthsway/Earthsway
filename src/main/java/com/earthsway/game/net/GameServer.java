@@ -52,6 +52,7 @@ public class GameServer extends Thread{
         String message = new String(data).trim();
         Packet.PacketTypes type = Packet.lookupPacket(message.substring(0, 2));
         Packet packet = null;
+
         switch (type){
             default:
             case INVALID:

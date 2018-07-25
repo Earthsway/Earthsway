@@ -3,8 +3,6 @@ package com.earthsway.game;
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
-import com.earthsway.game.gfx.Colors;
-import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
 import com.earthsway.game.level.Level;
@@ -37,7 +35,7 @@ public class Main extends Canvas implements Runnable{
     private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     private int[] colors = new int[6*6*6];
 
-    private Screen screen;
+    public Screen screen;
     public InputHandler input;
     public WindowHandler windowHandler;
     public Level level;
@@ -179,11 +177,16 @@ public class Main extends Canvas implements Runnable{
                 if(colorCode < 255) pixels[x+y*WIDTH] = colors[colorCode];
             }
         }
+        Graphics graphics;
+        graphics = bs.getDrawGraphics();
+        graphics.drawRect(0,0,getWidth(),getHeight());
+        graphics.drawImage(image, 0,0, getWidth(), getHeight(), null);
 
-        Graphics g = bs.getDrawGraphics();
-        g.drawRect(0,0,getWidth(),getHeight());
-        g.drawImage(image, 0,0, getWidth(), getHeight(), null);
-        g.dispose();
+        int healthScale =  / 100;
+        graphics.setColor(Color.GREEN);
+        graphics.fillRect(100, 100, 20 * healthScale, 20);
+
+        graphics.dispose();
         bs.show();
     }
 
@@ -192,16 +195,19 @@ public class Main extends Canvas implements Runnable{
             default:
             case INFO:
                 if(debugMode){
-                    System.out.println("[" + NAME + "][INFO]" + msg);
+                    System.out.println("[" + NAME + "][INFO] " + msg);
+                    break;
                 }
             case WARNING:
                 if(debugMode){
-                    System.out.println("[" + NAME + "][WARNING]" + msg);
+                    System.out.println("[" + NAME + "][WARNING] " + msg);
+                    break;
                 }
             case SEVERE:
                 if(debugMode){
-                    System.out.println("[" + NAME + "][SEVERE]" + msg);
+                    System.out.println("[" + NAME + "][SEVERE] " + msg);
                     this.stop();
+                    break;
                 }
 
         }

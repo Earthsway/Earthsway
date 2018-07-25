@@ -35,7 +35,7 @@ public class GameClient extends Thread{
             try {
                 socket.receive(packet);
             } catch (IOException e) {
-                e.printStackTrace();
+                                e.printStackTrace();
                 Utilities.errorReport(e, getClass());
             }
 
@@ -50,7 +50,7 @@ public class GameClient extends Thread{
         String message = new String(data).trim();
         Packet.PacketTypes type = Packet.lookupPacket(message.substring(0, 2));
         Packet packet = null;
-        switch (type){
+        switch (type) {
             default:
             case INVALID:
                 break;
@@ -64,7 +64,7 @@ public class GameClient extends Thread{
                 main.level.removePlayerMP(((Packet01Disconnect) packet).getUsername());
             case MOVE:
                 packet = new Packet02Move(data);
-                handleMove((Packet02Move)packet);
+                handleMove((Packet02Move) packet);
         }
     }
 
