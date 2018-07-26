@@ -2,7 +2,7 @@ package com.earthsway.game.gfx;
 
 public class Colors {
     public static int get(int color1, int color2, int color3, int color4){
-        return ((get(color4)<< 24) + (get(color3)<<16) + (get(color2)<<8) + (get(color1)));
+        return ((get(color4)<<24) + (get(color3)<<16) + (get(color2)<<8) + (get(color1)));
     }
 
     private static int get(int color) {
@@ -12,5 +12,6 @@ public class Colors {
         int b = color%10;
         return r*36 + g*6 + b;
     }
+
 
 }

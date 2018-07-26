@@ -46,12 +46,9 @@ public class Screen {
         for (int y = 0; y < 8; y++) {
             int ySheet = y;
             if(mirrorY) ySheet = 7 - y;
-
             int yPixel = y + yPos + (y * scaleMap) - ((scaleMap << 3)/2);
-
             for (int x = 0; x < 8; x++) {
                 int xSheet = x;
-
                 if(mirrorX) xSheet = 7 - x;
                 int xPixel = x + xPos + (x*scaleMap) - ((scaleMap << 3) / 2);
                 int col = (color >> (sheet.pixels[xSheet + ySheet * sheet.width + tileOffset] * 8)) & 255;
@@ -63,8 +60,6 @@ public class Screen {
                             pixels[(xPixel + xScale) + (yPixel + yScale) * width] = col;
                         }
                     }
-
-
                 }
             }
         }

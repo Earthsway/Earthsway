@@ -20,13 +20,14 @@ public class Player extends Mob{
 
     public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
         super(level, "Player", x, y, new Coords(100, 100),1, true, scale,
-                new Health(100), new Shield(100), true, true, 1, true, EntityType.PLAYER);
+                new Health(100), new Shield(0, 0, 100), false, true, 1, true, EntityType.PLAYER);
         this.input = input;
         this.scale = scale;
         this.username = username;
     }
 
     public void tick() {
+        //this.color = Colors.get(-1, 180, 145, 543); for worker sprite
         this.coords = new Coords(this.x, this.y);
         super.tick();
         int xa = 0;
