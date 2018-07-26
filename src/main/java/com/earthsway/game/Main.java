@@ -3,6 +3,7 @@ package com.earthsway.game;
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
+import com.earthsway.game.gfx.Hud;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
 import com.earthsway.game.level.Level;
@@ -182,9 +183,7 @@ public class Main extends Canvas implements Runnable{
         graphics.drawRect(0,0,getWidth(),getHeight());
         graphics.drawImage(image, 0,0, getWidth(), getHeight(), null);
 
-        int healthScale =  / 100;
-        graphics.setColor(Color.GREEN);
-        graphics.fillRect(100, 100, 20 * healthScale, 20);
+        new Hud(graphics);
 
         graphics.dispose();
         bs.show();
@@ -216,6 +215,6 @@ public class Main extends Canvas implements Runnable{
     public static enum DebugLevel{
         INFO,
         WARNING,
-        SEVERE;
+        SEVERE
     }
 }

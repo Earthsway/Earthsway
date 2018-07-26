@@ -1,5 +1,9 @@
 package com.earthsway.game.entities;
 
+import com.earthsway.game.entities.utilities.Coords;
+import com.earthsway.game.entities.utilities.EntityType;
+import com.earthsway.game.entities.utilities.Health;
+import com.earthsway.game.entities.utilities.Shield;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.level.tiles.Tile;
 
@@ -10,43 +14,22 @@ public abstract class Mob extends Entity{
     protected int numSteps = 0;
     protected boolean isMoving;
     protected int movingDir = 1;
-    protected int scale = 1;
+    protected int scale;
     protected boolean canMoveDiagonal;
-    protected int health = 100;
-    protected double hitCooldown = 0.00;
+    protected Health health;
+    protected Shield shield;
+    protected double currentHitCooldown = 0.00;
+    protected double hitCooldown;
+    protected boolean damageable;
+    protected Coords coords;
+    protected Tile[] onTiles = new Tile[4];
+    protected boolean canSwim;
+    protected boolean swimming = false;
+    protected boolean respawnWithShield;
+    protected Coords respawnCoords;
+    protected EntityType entityType;
 
-    public Mob(Level level, String name, int x, int y, int speed) {
-        super(level);
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.canMoveDiagonal = false;
-        this.scale = 1;
-    }
-
-    public Mob(Level level, String name, int x, int y, int speed, boolean canMoveDiagonal) {
-        super(level);
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.canMoveDiagonal = canMoveDiagonal;
-        this.scale = 1;
-
-    }
-
-    public Mob(Level level, String name, int x, int y, int speed, boolean canMoveDiagonal, int scale) {
-        super(level);
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.canMoveDiagonal = canMoveDiagonal;
-        this.scale = scale;
-    }
-
-    public Mob(Level level, String name, int x, int y, int speed, boolean canMoveDiagonal, int scale, int health) {
+    public Mob(Level level, String name, int x, int y, Coords respawnCoords, int speed, boolean canMoveDiagonal, int scale, Health health, Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType) {
         super(level);
         this.name = name;
         this.x = x;
@@ -55,6 +38,13 @@ public abstract class Mob extends Entity{
         this.canMoveDiagonal = canMoveDiagonal;
         this.scale = scale;
         this.health = health;
+        this.shield = shield;
+        this.damageable = damageable;
+        this.canSwim = canSwim;
+        this.entityType = entityType;
+        this.hitCooldown = hitCooldown;
+        this.respawnWithShield = respawnWithShield;
+        this.respawnCoords = respawnCoords;
     }
 
     public void move(int xa, int ya) {
@@ -72,19 +62,45 @@ public abstract class Mob extends Entity{
             if (xa > 0) movingDir = 3;
             x += xa * speed;
             y += ya * speed;
-            if (damaged() && this.hitCooldown <= 0.00) {
-                this.hitCooldown = 1.00;
-                this.health -= 5;
+            if (this.damageable && this.currentHitCooldown <= 0.00) {
+                Tile t = shouldBeDamaged();
+                if(t != null){
+                    this.currentHitCooldown = this.hitCooldown;
+                    damage(t.getDamageAmount());
+                }
             }
-        } else if (damagedSolid(xa, ya) && this.hitCooldown <= 0.00) {
-            this.hitCooldown = 1.00;
-            this.health -= 5;
+        } else if (this.damageable && this.currentHitCooldown <= 0.00) {
+            Tile t = damagedSolid(xa, ya);
+            if(t != null){
+                this.currentHitCooldown = this.hitCooldown;
+                damage(t.getDamageAmount());
+            }
         }
     }
 
+    public void tick() {
+        this.updateTiles();
+        Tile t = null;
+        for (Tile tile : this.onTiles) {
+            if (tile.isConstantDamaging()){t = tile; break;}
+        }
+        if (t != null && this.currentHitCooldown <= 0) {
+            this.currentHitCooldown = this.hitCooldown;
+            damage(t.getDamageAmount());
+        }
+        if(canSwim) shouldSwim();
+
+        this.currentHitCooldown -= 0.05;//default 0.05
+    }
+
     public abstract boolean hasCollided(int xa, int ya);
-    public abstract boolean damagedSolid(int xa, int ya);
-    public abstract boolean damaged();
+    public abstract Tile damagedSolid(int xa, int ya);
+    public abstract void updateTiles();
+
+    protected Tile shouldBeDamaged(){
+        for (Tile tile : this.onTiles) {if (tile.isDamaging()){return tile;}}
+        return null;
+    }
 
     protected boolean isSolidTile(int xa, int ya, int x, int y){
         if(level == null) return false;
@@ -93,34 +109,61 @@ public abstract class Mob extends Entity{
         return !lastTile.equals(newTile) && newTile.isSolid();
     }
 
-    protected boolean isSolidDamagingTile(int xa, int ya, int x, int y){
-        if(level == null) return false;
+    protected Tile isSolidDamagingTile(int xa, int ya, int x, int y){
+        if(level == null) return null;
         Tile lastTile = level.getTile((this.x + x) >> 3, (this.y + y) >> 3);
         Tile newTile = level.getTile((this.x + x + xa) >> 3, (this.y + y + ya) >> 3);
-        return !lastTile.equals(newTile) && newTile.isDamaging();
+        if(!lastTile.equals(newTile) && newTile.isDamaging()) return newTile;
+        return null;
     }
 
-    protected boolean isDamagingTile(int x, int y){
-        if(level == null) return false;
-        return level.getTile((this.x + x) >> 3, (this.y + y) >> 3).isDamaging();
+    protected void shouldSwim(){
+        int i = 0;
+        for (Tile tile : this.onTiles) {if (tile.getId() == Tile.WATER.getId()){i++;}}
+        this.swimming = i >= 4;
     }
 
-    /*protected boolean isSolidDamagingTile(int xa, int ya, int x, int y){
-        if(level == null) return false;
-        Tile lastTile = level.getTile((this.x + x) >> 3, (this.y + y) >> 3);
-        Tile newTile = level.getTile((this.x + x + xa) >> 3, (this.y + y + ya) >> 3);
-        return !lastTile.equals(newTile) && newTile.isDamaging();
-    }*/
+    protected void damage(int amount){damage(amount, false);}
+    protected void damage(int amount, boolean bypassShield) {
+        if (bypassShield) this.health.subtractFromCurrentHealth(amount);
+        else {
+            int shield = this.shield.getCurrentShield() - amount;
+            if (shield < 0) {
+                this.health.subtractFromCurrentHealth(-shield);
+                this.shield.setCurrentShield(0);
+            } else {
+                this.shield.subtractFromCurrentShield(amount);
+            }
+        }
+    }
 
-
+    protected void respawn(){
+        this.x = respawnCoords.getX();
+        this.y = respawnCoords.getY();
+        this.health.setCurrentHealth(this.health.getMaxHealth());
+        if(this.respawnWithShield) this.shield.setCurrentShield(this.shield.getMaxShield());
+    }
 
     public String getName() {return name;}
+    public Coords getCoords() {return coords;}
+    public int getSpeed() {return speed;}
+    public boolean canMoveDiagonal() {return canMoveDiagonal;}
+    public int getScale() {return scale;}
+    public boolean isDamageable() {return damageable;}
+    public boolean canSwim() {return canSwim;}
+    public EntityType getEntityType() {return entityType;}
     public int getNumSteps() {return numSteps;}
     public boolean isMoving() {return isMoving;}
     public int getMovingDir() {return movingDir;}
-    public int getHealth() {return health;}
+    public Health getHealth() {return health;}
+    public Shield getShield() {return shield;}
+    public double getHitCooldown() {return hitCooldown;}
+    public double getCurrentHitCooldown() {return currentHitCooldown;}
+    public boolean canRespawnWithShield() {return respawnWithShield;}
 
     public void setNumSteps(int numSteps) {this.numSteps = numSteps;}
     public void setMoving(boolean moving) {isMoving = moving;}
     public void setMovingDir(int movingDir) {this.movingDir = movingDir;}
+    public void setHitCooldown(double hitCooldown) {this.hitCooldown = hitCooldown;}
+
 }

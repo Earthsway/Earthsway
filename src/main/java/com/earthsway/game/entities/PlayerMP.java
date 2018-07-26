@@ -11,13 +11,13 @@ public class PlayerMP extends Player {
     public int port;
 
     public PlayerMP(Level level, int x, int y, InputHandler input, String username, InetAddress ipAddress, int port) {
-        super(level, x, y, input, username);
+        super(level, x, y, input, 1, username);
         this.ipAddress = ipAddress;
         this.port = port;
     }
 
     public PlayerMP(Level level, int x, int y, String username, InetAddress ipAddress, int port) {
-        super(level, x, y, null, username);
+        super(level, x, y, null, 1, username);
         this.ipAddress = ipAddress;
         this.port = port;
     }

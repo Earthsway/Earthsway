@@ -19,7 +19,7 @@ public class Level {
     private byte[] tiles;
     public int width;
     public int height;
-    private List<Entity> entities = new ArrayList<Entity>();
+    private List<Entity> entities = new ArrayList<>();
 
     private BufferedImage image;
     private String imagePath;

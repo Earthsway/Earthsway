@@ -1,5 +1,6 @@
 package com.earthsway.game.level.tiles;
 
+import com.earthsway.game.entities.utilities.Coords;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 
@@ -9,7 +10,7 @@ public class BaseTile extends Tile{
     protected int tileColor;
 
     public BaseTile(int id, int x, int y, int tileColor, int levelColor) {
-        super(id, false, false, false, levelColor);
+        super(id, false, false, false, false, -0, levelColor);
         this.tileId = x + y * 32;
         this.tileColor = tileColor;
     }
