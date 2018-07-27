@@ -1,5 +1,6 @@
 package com.earthsway.game.entities;
 
+import com.earthsway.game.entities.utilities.EntityType;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 
@@ -7,6 +8,7 @@ public abstract class Entity {
 
     public int x,y;
     protected Level level;
+    protected EntityType entityType;
 
     public Entity(Level level){
         init(level);
@@ -18,4 +20,6 @@ public abstract class Entity {
 
     public abstract void tick();
     public abstract void render(Screen screen);
+
+    public EntityType getEntityType() {return entityType;}
 }

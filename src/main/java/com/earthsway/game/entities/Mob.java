@@ -1,14 +1,13 @@
 package com.earthsway.game.entities;
 
-import com.earthsway.game.entities.utilities.Coords;
-import com.earthsway.game.entities.utilities.EntityType;
-import com.earthsway.game.entities.utilities.Health;
-import com.earthsway.game.entities.utilities.Shield;
+import com.earthsway.game.entities.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
+import com.earthsway.game.level.Node;
 import com.earthsway.game.level.tiles.Tile;
 
+import java.util.List;
 import java.util.Random;
 
 public abstract class Mob extends Entity{
@@ -32,7 +31,6 @@ public abstract class Mob extends Entity{
     protected boolean swimming = false;
     protected boolean respawnWithShield;
     protected Coords respawnCoords;
-    protected EntityType entityType;
     protected int[] collisionBox;
     protected int tickCount = 0;
 
@@ -194,18 +192,23 @@ public abstract class Mob extends Entity{
         }
     }
 
-    protected void followMovementAI(int x, int y, int px, int py, int xa, int ya, double speed, Mob mob) {
-        ya = 0;
+    protected void followMovementAI(int x, int y, int px, int py, double xa,
+                                   double ya, double speed, Mob mob, List<Node> path, int time) {
         xa = 0;
-        if (px > x)
-            xa+=speed;
-        if (px < x)
-            xa-=speed;
-        if (py > y)
-            ya+=speed;
-        if (py < y)
-            ya-=speed;
-        moveMob(xa, ya, mob);
+        ya = 0;
+        Vector2i start = new Vector2i(x >> 3, y >> 3);
+        Vector2i goal = new Vector2i(px >> 3, py >> 3);
+        path = level.findPath(start, goal);
+        if(path != null) {
+            if(path.size() > 0){
+                Vector2i vector = path.get(path.size() - 1).tile;
+                if(x < vector.getX() << 3) xa =+ speed;
+                if(x > vector.getX() << 3) xa =- speed;
+                if(y < vector.getY() << 3) ya =+ speed;
+                if(y > vector.getY() << 3) ya =- speed;
+                moveMob((int)xa, (int)ya, mob);
+            }
+        }
     }
 
     protected int[] randomMovementAI(int x, int y, int xa, int ya, int tick) {
@@ -217,10 +220,10 @@ public abstract class Mob extends Entity{
                 ya = 0;
             }
         }
-        if(x <= 180){
+        /*if(x <= 180){
             xa = 1;
             ya = -1;
-        }
+        }*/ //TODO will this affect
         int move[] = new int[2];
         move[0] = xa;
         move[1] = ya;

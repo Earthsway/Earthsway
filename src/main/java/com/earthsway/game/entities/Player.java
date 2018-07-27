@@ -1,5 +1,6 @@
 package com.earthsway.game.entities;
 
+import club.minnced.discord.rpc.DiscordRichPresence;
 import com.earthsway.game.InputHandler;
 import com.earthsway.game.Main;
 import com.earthsway.game.entities.utilities.*;
@@ -18,7 +19,7 @@ public class Player extends Mob{
 
     public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
         super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),1, true, scale,
-                new Health(100), new Shield(0, 0, 100), false, true, 1, true, EntityType.PLAYER);
+                new Health(100), new Shield(0, 0, 100), true, true, 1, true, EntityType.PLAYER);
         this.input = input;
         this.scale = scale;
         this.username = username;
@@ -42,10 +43,11 @@ public class Player extends Mob{
             packet.writeData(Main.main.socketClient);
         }else isMoving = false;
 
-        if(this.health.getCurrentHealth() <= this.health.getMinHealth()){
+        if(this.health.getCurrentHealth() <= this.health.getMinHealth()) {
             System.out.println("You Have Died");
             respawn();
         }
+        sendDiscordData();
     }
 
     @Override
@@ -53,6 +55,26 @@ public class Player extends Mob{
         super.respawn();
         Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
         packet.writeData(Main.main.socketClient);
+    }
+
+    private void sendDiscordData() {
+        if (this.shield.getCurrentShield() <= 0) Main.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth();
+        else Main.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth() + " | "
+                    + "Shield: " + this.shield.getCurrentShield() + "/" + this.shield.getMaxShield();
+        /*int multiplayerAmount = 0;
+        for(EntityType et : this.level.getEntityTypes()){
+            if (et.equals(EntityType.PLAYER_MULTIPLAYER)) multiplayerAmount++;
+        }
+        if(multiplayerAmount > 0){
+            Main.presence.state = "Playing With";
+            Main.presence.partySize = multiplayerAmount;
+            Main.presence.partyMax = multiplayerAmount;
+        }
+        else{
+            Main.presence.state = "";
+            Main.presence.partySize = 0;
+            Main.presence.partyMax = 0;
+        }*/
     }
 
     public void render(Screen screen) {

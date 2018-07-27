@@ -1,9 +1,13 @@
 package com.earthsway.game.entities;
 
+import com.earthsway.game.Main;
 import com.earthsway.game.entities.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
+import com.earthsway.game.level.Node;
+
+import java.util.List;
 
 public class Worker extends Mob {
 
@@ -11,6 +15,8 @@ public class Worker extends Mob {
     private int[] movement;
     private int xa = 0;
     private int ya = 0;
+    private List<Node> path = null;
+    private int time = 0;
 
     public Worker(Level level, int x, int y) {
         super(level, null, x, y, new int[]{0,6,3,6}, new Coords(100, 100),1, false, 1,
@@ -18,16 +24,19 @@ public class Worker extends Mob {
     }
 
     public void tick(){
-        movement = randomMovementAI(x, y, xa, ya, this.tickCount);
+        //movement = randomMovementAI(x, y, xa, ya, this.tickCount);
 
-        this.xa = movement[0];
-        this.ya = movement[1];
+        followMovementAI(this.x, this.y, Main.main.player.x, Main.main.player.y, xa, ya, this.speed, this, path, time);
+
+        //this.xa = movement[0];
+        //this.ya = movement[1];
 
         moveMob(xa, ya, this);
         super.tick();
     }
 
     public void render(Screen screen) {
+        time++;
         int xTile = 0;
         int yTile = 25;
 
