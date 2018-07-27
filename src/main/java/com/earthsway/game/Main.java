@@ -1,8 +1,12 @@
 package com.earthsway.game;
 
+import club.minnced.discord.rpc.DiscordEventHandlers;
+import club.minnced.discord.rpc.DiscordRPC;
+import club.minnced.discord.rpc.DiscordRichPresence;
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
+import com.earthsway.game.entities.Worker;
 import com.earthsway.game.gfx.Hud;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
@@ -26,6 +30,7 @@ public class Main extends Canvas implements Runnable{
     public static Main main;
     public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
 
+
     private Thread thread;
 
     public JFrame frame;
@@ -47,8 +52,11 @@ public class Main extends Canvas implements Runnable{
 
     public boolean debugMode;
 
+    public static DiscordRPC lib = DiscordRPC.INSTANCE;
+
     public void init(){
         main = this;
+        runDiscordRPC();
         int index = 0;
         for(int r = 0; r<6;r++) {
             for (int g = 0; g < 6; g++) {
@@ -68,12 +76,35 @@ public class Main extends Canvas implements Runnable{
         level = new Level("/levels/small_test_level.png");
         player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username"), null, -1);
         level.addEntity(player);
+        Worker worker = new Worker(level, 90, 90);
+        level.addEntity(worker);
         Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
         if(socketServer != null){
             socketServer.addConnection((PlayerMP) player, loginPacket);
         }
         //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
+    }
+
+    public void runDiscordRPC(){
+        String applicationId = "472228275586990090";
+        String steamId = "";
+        DiscordEventHandlers handlers = new DiscordEventHandlers();
+        handlers.ready = (user) -> System.out.println("Ready!");
+        lib.Discord_Initialize(applicationId, handlers, true, steamId);
+        DiscordRichPresence presence = new DiscordRichPresence();
+        presence.startTimestamp = System.currentTimeMillis() / 1000;
+        presence.details = "Messing Around";
+        lib.Discord_UpdatePresence(presence);
+
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                lib.Discord_RunCallbacks();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {}
+            }
+        }, "RPC-Callback-Handler").start();
     }
 
     public synchronized void start(){
@@ -90,6 +121,7 @@ public class Main extends Canvas implements Runnable{
     }
 
     public synchronized void stop(){
+        lib.Discord_Shutdown();
         running = false;
         try {
             thread.join();
@@ -217,4 +249,5 @@ public class Main extends Canvas implements Runnable{
         WARNING,
         SEVERE
     }
+
 }

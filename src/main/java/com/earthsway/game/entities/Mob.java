@@ -4,11 +4,16 @@ import com.earthsway.game.entities.utilities.Coords;
 import com.earthsway.game.entities.utilities.EntityType;
 import com.earthsway.game.entities.utilities.Health;
 import com.earthsway.game.entities.utilities.Shield;
+import com.earthsway.game.gfx.Colors;
+import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.level.tiles.Tile;
 
+import java.util.Random;
+
 public abstract class Mob extends Entity{
 
+    protected Random random = new Random();
     protected String name;
     protected int speed;
     protected int numSteps = 0;
@@ -28,8 +33,10 @@ public abstract class Mob extends Entity{
     protected boolean respawnWithShield;
     protected Coords respawnCoords;
     protected EntityType entityType;
+    protected int[] collisionBox;
+    protected int tickCount = 0;
 
-    public Mob(Level level, String name, int x, int y, Coords respawnCoords, int speed, boolean canMoveDiagonal, int scale, Health health, Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType) {
+    public Mob(Level level, String name, int x, int y, int[] collisionBox, Coords respawnCoords, int speed, boolean canMoveDiagonal, int scale, Health health, Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType) {
         super(level);
         this.name = name;
         this.x = x;
@@ -45,6 +52,7 @@ public abstract class Mob extends Entity{
         this.hitCooldown = hitCooldown;
         this.respawnWithShield = respawnWithShield;
         this.respawnCoords = respawnCoords;
+        this.collisionBox = collisionBox;
     }
 
     public void move(int xa, int ya) {
@@ -91,15 +99,35 @@ public abstract class Mob extends Entity{
         if(canSwim) shouldSwim();
 
         this.currentHitCooldown -= 0.05;//default 0.05
+        this.tickCount++;
     }
-
-    public abstract boolean hasCollided(int xa, int ya);
-    public abstract Tile damagedSolid(int xa, int ya);
-    public abstract void updateTiles();
 
     protected Tile shouldBeDamaged(){
         for (Tile tile : this.onTiles) {if (tile.isDamaging()){return tile;}}
         return null;
+    }
+
+    protected boolean hasCollided(int xa, int ya) {
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){if(isSolidTile(xa,ya,x,this.collisionBox[2])) return true;}
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){if(isSolidTile(xa,ya,x,this.collisionBox[3])) return true;}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){if(isSolidTile(xa,ya,this.collisionBox[0],y)) return true;}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){if(isSolidTile(xa,ya,this.collisionBox[1],y)) return true;}
+        return false;
+    }
+
+    protected Tile damagedSolid(int xa, int ya) {
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){Tile t = isSolidDamagingTile(xa,ya,x,this.collisionBox[2]); if(t != null){return t;}}
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){Tile t = isSolidDamagingTile(xa,ya,x,this.collisionBox[3]); if(t != null){return t;}}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){Tile t = isSolidDamagingTile(xa,ya,this.collisionBox[0],y); if(t != null){return t;}}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){Tile t = isSolidDamagingTile(xa,ya,this.collisionBox[1],y); if(t != null){return t;}}
+        return null;
+    }
+
+    protected void updateTiles() {
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){this.onTiles[0] = level.getTile((this.x + x) >> 3, (this.y + this.collisionBox[2]) >> 3);}
+        for(int x = this.collisionBox[0]; x < this.collisionBox[1]; x++){this.onTiles[1] = level.getTile((this.x + x) >> 3, (this.y + this.collisionBox[3]) >> 3);}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){this.onTiles[2] = level.getTile((this.x + this.collisionBox[0]) >> 3, (this.y + y) >> 3);}
+        for(int y = this.collisionBox[2]; y < this.collisionBox[3]; y++){this.onTiles[3] = level.getTile((this.x + this.collisionBox[1]) >> 3, (this.y + y) >> 3);}
     }
 
     protected boolean isSolidTile(int xa, int ya, int x, int y){
@@ -142,6 +170,70 @@ public abstract class Mob extends Entity{
         this.y = respawnCoords.getY();
         this.health.setCurrentHealth(this.health.getMaxHealth());
         if(this.respawnWithShield) this.shield.setCurrentShield(this.shield.getMaxShield());
+    }
+
+    protected void renderWaterSplash(Screen screen, int xOffset, int yOffset, int modifier, int flipTop, int flipBottom, int xTile, int yTile, int color){
+        if(this.swimming){
+            int waterColor;
+            yOffset += 4;
+            if(this.tickCount % 60 < 15)waterColor = Colors.get(-1, -1, 225, -1);
+            else if(15 <= this.tickCount % 60 && this.tickCount % 60 < 30){ waterColor = Colors.get(-1, 225, 115, -1);  yOffset -= 1;}
+            else if(30 <= this.tickCount % 60 && this.tickCount % 60 < 45) waterColor = Colors.get(-1, 115, -1, 225);
+            else{waterColor = Colors.get(-1, 225, 115, -1); yOffset -= 1;}
+
+            screen.render(xOffset, yOffset + 3, 31 + 31 * 32, waterColor, 0x00, 1);
+            screen.render(xOffset + 8, yOffset + 3, 31 + 31 * 32, waterColor, 0x01, 1);
+        }
+
+        screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
+        screen.render(xOffset + modifier - (modifier* flipTop), yOffset, (xTile + 1) + yTile*32, color,flipTop, scale);
+
+        if(!this.swimming){
+            screen.render(xOffset  + (modifier* flipBottom), yOffset + modifier, xTile + (yTile + 1)*32, color, flipBottom, scale);
+            screen.render(xOffset + modifier - (modifier* flipBottom), yOffset + modifier, (xTile + 1) + (yTile + 1)*32, color, flipBottom, scale);
+        }
+    }
+
+    protected void followMovementAI(int x, int y, int px, int py, int xa, int ya, double speed, Mob mob) {
+        ya = 0;
+        xa = 0;
+        if (px > x)
+            xa+=speed;
+        if (px < x)
+            xa-=speed;
+        if (py > y)
+            ya+=speed;
+        if (py < y)
+            ya-=speed;
+        moveMob(xa, ya, mob);
+    }
+
+    protected int[] randomMovementAI(int x, int y, int xa, int ya, int tick) {
+        if (tick % (random.nextInt(50) + 30) == 0) {
+            xa = random.nextInt(3) - 1;
+            ya = random.nextInt(3) - 1;
+            if (random.nextInt(4) == 0) {
+                xa = 0;
+                ya = 0;
+            }
+        }
+        if(x <= 180){
+            xa = 1;
+            ya = -1;
+        }
+        int move[] = new int[2];
+        move[0] = xa;
+        move[1] = ya;
+        return move;
+    }
+
+    protected void moveMob(int xa, int ya, Mob mob) {
+        if (xa != 0 || ya != 0) {
+            mob.move(xa, ya);
+            mob.isMoving = true;
+        } else {
+            mob.isMoving = false;
+        }
     }
 
     public String getName() {return name;}
