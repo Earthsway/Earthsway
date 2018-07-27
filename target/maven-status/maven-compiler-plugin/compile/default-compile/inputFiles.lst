@@ -5,6 +5,7 @@ C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\g
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\gfx\Font.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\GameLauncher.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\level\tiles\BasicSolidTile.java
+C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\level\Node.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\MovingDirection.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\gfx\Screen.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\net\packets\Packet01Disconnect.java
@@ -27,7 +28,9 @@ C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\g
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\Health.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\level\Level.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\EntityType.java
+C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\Vector2i.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\level\tiles\AnimatedTile.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\net\GameClient.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\Shield.java
+C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\entities\utilities\DiscordData.java
 C:\Users\ryan\Documents\GitHub\Earthsway\Earthsway\src\main\java\com\earthsway\game\level\tiles\BasicDamagingTile.java

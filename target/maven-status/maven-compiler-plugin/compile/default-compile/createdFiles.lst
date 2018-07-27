@@ -2,6 +2,7 @@ com\earthsway\game\net\packets\Packet01Disconnect.class
 com\earthsway\game\entities\Player.class
 com\earthsway\game\Main$1.class
 com\earthsway\game\level\Level.class
+com\earthsway\game\level\Node.class
 com\earthsway\game\entities\utilities\Health.class
 com\earthsway\game\entities\utilities\Shield.class
 com\earthsway\game\Main$DebugLevel.class
@@ -16,6 +17,7 @@ com\earthsway\game\net\packets\Packet.class
 com\earthsway\game\entities\utilities\EntityType.class
 com\earthsway\game\InputHandler$Key.class
 com\earthsway\game\level\tiles\AnimatedTile.class
+com\earthsway\game\level\Level$1.class
 com\earthsway\game\net\GameServer.class
 com\earthsway\game\entities\utilities\Coords.class
 com\earthsway\game\GameLauncher.class
@@ -33,8 +35,9 @@ com\earthsway\game\gfx\Screen.class
 com\earthsway\Utilities.class
 com\earthsway\game\gfx\Hud.class
 com\earthsway\game\level\tiles\BasicDamagingTile.class
+com\earthsway\game\entities\utilities\Vector2i.class
 com\earthsway\game\InputHandler.class
 com\earthsway\game\level\tiles\BasicSolidTile.class
 com\earthsway\game\WindowHandler.class
-com\earthsway\game\Main$2.class
+com\earthsway\game\entities\utilities\DiscordData.class
 com\earthsway\game\net\GameServer$1.class

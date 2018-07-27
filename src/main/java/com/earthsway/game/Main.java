@@ -3,7 +3,6 @@ package com.earthsway.game;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
-import club.minnced.discord.rpc.DiscordUser;
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
@@ -60,7 +59,6 @@ public class Main extends Canvas implements Runnable{
     private static DiscordRichPresence lastSentPresence = null;
 
     public void init(){
-        runDiscordRPC();
         main = this;
         int index = 0;
         for(int r = 0; r<6;r++) {
@@ -79,10 +77,20 @@ public class Main extends Canvas implements Runnable{
         input = new InputHandler(this);
 
         level = new Level("/levels/small_test_level.png");
-        player = new PlayerMP(level, 100, 100, input, discordUser.username(), null, -1);
-        //player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username"), null, -1);
+
+
+        if(!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to use your discord?\nThis will only work if discord is running.\n(RECOMMENDED YES)") == 0){runDiscordRPC();
+        if(JOptionPane.showConfirmDialog(this, "Do you want to use your discord name?\n(RECOMMENDED NO)") == 0) {
+            player = new PlayerMP(level, 100, 100, input, discordUser.username(), null, -1);}
+        else player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username.\n(RECOMMENDED CANCEL)"), null, -1);}
+        else if (!loadRecommendedSettings)player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username.\n(RECOMMENDED CANCEL)"), null, -1);
+
+        if(loadRecommendedSettings){
+            runDiscordRPC();
+            player = new PlayerMP(level, 100, 100, input, "", null, -1);
+        }
         level.addEntity(player);
-        Worker worker = new Worker(level, 90, 90);
+        Worker worker = new Worker(level, 90, 90, true);
         level.addEntity(worker);
         Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
         if(socketServer != null){
@@ -92,52 +100,15 @@ public class Main extends Canvas implements Runnable{
         loginPacket.writeData(socketClient);
     }
 
-    public void runDiscordRPC() {
-        String applicationId = "472228275586990090";
-        String steamId = "";
-        DiscordEventHandlers handlers = new DiscordEventHandlers();
-        handlers.ready = (user) -> {//System.out.println("Discord Ready " + user.username + "!");
-            discordUser = new DiscordData(user.userId, user.username, user.discriminator, user.avatar);
-        };
-        discordRPC.Discord_Initialize(applicationId, handlers, true, steamId);
-
-        presence.startTimestamp = System.currentTimeMillis() / 1000;
-        presence.details = "Messing Around";
-        discordRPC.Discord_UpdatePresence(presence);
-        new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                discordRPC.Discord_RunCallbacks();
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }, "RPC-Callback-Handler").start();
-
-        new Thread(() -> {
-            while (!Thread.currentThread().isInterrupted()) {
-                if(Main.lastSentPresence != presence) Main.discordRPC.Discord_UpdatePresence(Main.presence);
-                try {
-                    Thread.sleep(250);
-                } catch (InterruptedException ignored) {
-                }
-            }
-        }, "RPC-Update-Presence-Handler").start();
-
-        while (discordUser == null) {
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException ignored) {
-            }
-        }
-        System.out.println("Hello: " + discordUser.username() + "#" + discordUser.discriminator());
-    }
+    private boolean loadRecommendedSettings = false;
 
     public synchronized void start(){
         running = true;
         thread = new Thread(this, NAME + "_main");
         thread.start();
-        if(JOptionPane.showConfirmDialog(this, "Do you want to run the server?") == 0){
+            loadRecommendedSettings = JOptionPane.showConfirmDialog(this, "Do you want to load Recommended Settings?\n(RECOMMENDED YES)") == 0;
+
+        if(!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to run the server?\n(RECOMMENDED NO)") == 0){
             socketServer = new GameServer(this);
             socketServer.start();
         }
@@ -200,6 +171,47 @@ public class Main extends Canvas implements Runnable{
                 ticks = 0;
             }
         }
+    }
+
+    public void runDiscordRPC() {
+        String applicationId = "472228275586990090";
+        String steamId = "";
+        DiscordEventHandlers handlers = new DiscordEventHandlers();
+        handlers.ready = (user) -> {//System.out.println("Discord Ready " + user.username + "!");
+            discordUser = new DiscordData(user.userId, user.username, user.discriminator, user.avatar);
+        };
+        discordRPC.Discord_Initialize(applicationId, handlers, true, steamId);
+
+        presence.startTimestamp = System.currentTimeMillis() / 1000;
+        presence.details = "Messing Around";
+        discordRPC.Discord_UpdatePresence(presence);
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                discordRPC.Discord_RunCallbacks();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }, "RPC-Callback-Handler").start();
+
+        new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                if(Main.lastSentPresence != presence) Main.discordRPC.Discord_UpdatePresence(Main.presence);
+                try {
+                    Thread.sleep(250);
+                } catch (InterruptedException ignored) {
+                }
+            }
+        }, "RPC-Update-Presence-Handler").start();
+
+        while (discordUser == null) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException ignored) {
+            }
+        }
+        System.out.println("Hello: " + discordUser.username() + "#" + discordUser.discriminator());
     }
 
     public void tick(){

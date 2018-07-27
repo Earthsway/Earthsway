@@ -101,7 +101,7 @@ public abstract class Mob extends Entity{
     }
 
     protected Tile shouldBeDamaged(){
-        for (Tile tile : this.onTiles) {if (tile.isDamaging()){return tile;}}
+        for (Tile tile : this.onTiles) {if (tile != null && tile.isDamaging()){return tile;}}
         return null;
     }
 
