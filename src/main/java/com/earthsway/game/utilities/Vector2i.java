@@ -1,4 +1,4 @@
-package com.earthsway.game.entities.utilities;
+package com.earthsway.game.utilities;
 
 public class Vector2i {
     private int x, y;

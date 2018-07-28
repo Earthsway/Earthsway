@@ -1,6 +1,6 @@
 package com.earthsway.game.level;
 
-import com.earthsway.game.entities.utilities.Vector2i;
+import com.earthsway.game.utilities.Vector2i;
 
 public class Node {
     public Vector2i tile;

@@ -1,14 +1,12 @@
 package com.earthsway.game.entities;
 
-import club.minnced.discord.rpc.DiscordRichPresence;
 import com.earthsway.game.InputHandler;
 import com.earthsway.game.Main;
-import com.earthsway.game.entities.utilities.*;
+import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Font;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
-import com.earthsway.game.level.tiles.Tile;
 import com.earthsway.game.net.packets.Packet02Move;
 
 public class Player extends Mob{

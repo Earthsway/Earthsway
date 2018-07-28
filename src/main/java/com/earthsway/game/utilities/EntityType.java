@@ -1,4 +1,4 @@
-package com.earthsway.game.entities.utilities;
+package com.earthsway.game.utilities;
 
 import com.earthsway.game.entities.Entity;
 import com.earthsway.game.entities.Player;

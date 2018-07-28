@@ -1,4 +1,4 @@
-package com.earthsway.game.entities.utilities;
+package com.earthsway.game.utilities;
 
 public final class MovingDirection {
     public static final int UP = 1;

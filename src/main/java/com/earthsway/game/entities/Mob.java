@@ -1,6 +1,6 @@
 package com.earthsway.game.entities;
 
-import com.earthsway.game.entities.utilities.*;
+import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;

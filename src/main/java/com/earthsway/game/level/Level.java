@@ -3,8 +3,8 @@ package com.earthsway.game.level;
 import com.earthsway.Utilities;
 import com.earthsway.game.entities.Entity;
 import com.earthsway.game.entities.PlayerMP;
-import com.earthsway.game.entities.utilities.EntityType;
-import com.earthsway.game.entities.utilities.Vector2i;
+import com.earthsway.game.utilities.EntityType;
+import com.earthsway.game.utilities.Vector2i;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.tiles.Tile;
 

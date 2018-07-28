@@ -1,6 +1,6 @@
 package com.earthsway.game.level.tiles;
 
-import com.earthsway.game.entities.utilities.Coords;
+import com.earthsway.game.utilities.Coords;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;

@@ -7,7 +7,7 @@ import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.entities.Worker;
-import com.earthsway.game.entities.utilities.DiscordData;
+import com.earthsway.game.utilities.DiscordData;
 import com.earthsway.game.gfx.Hud;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
@@ -78,7 +78,6 @@ public class Main extends Canvas implements Runnable{
 
         level = new Level("/levels/small_test_level.png");
 
-
         if(!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to use your discord?\nThis will only work if discord is running.\n(RECOMMENDED YES)") == 0){runDiscordRPC();
         if(JOptionPane.showConfirmDialog(this, "Do you want to use your discord name?\n(RECOMMENDED NO)") == 0) {
             player = new PlayerMP(level, 100, 100, input, discordUser.username(), null, -1);}
@@ -90,8 +89,6 @@ public class Main extends Canvas implements Runnable{
             player = new PlayerMP(level, 100, 100, input, "", null, -1);
         }
         level.addEntity(player);
-        Worker worker = new Worker(level, 90, 90, true);
-        level.addEntity(worker);
         Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
         if(socketServer != null){
             socketServer.addConnection((PlayerMP) player, loginPacket);
@@ -102,13 +99,13 @@ public class Main extends Canvas implements Runnable{
 
     private boolean loadRecommendedSettings = false;
 
-    public synchronized void start(){
+    public synchronized void start() {
         running = true;
         thread = new Thread(this, NAME + "_main");
         thread.start();
-            loadRecommendedSettings = JOptionPane.showConfirmDialog(this, "Do you want to load Recommended Settings?\n(RECOMMENDED YES)") == 0;
+        loadRecommendedSettings = JOptionPane.showConfirmDialog(this, "Do you want to load Recommended Settings?\n(RECOMMENDED YES)") == 0;
 
-        if(!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to run the server?\n(RECOMMENDED NO)") == 0){
+        if (!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to run the server?\n(RECOMMENDED NO)") == 0) {
             socketServer = new GameServer(this);
             socketServer.start();
         }
@@ -199,7 +196,7 @@ public class Main extends Canvas implements Runnable{
             while (!Thread.currentThread().isInterrupted()) {
                 if(Main.lastSentPresence != presence) Main.discordRPC.Discord_UpdatePresence(Main.presence);
                 try {
-                    Thread.sleep(250);
+                    Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
                 }
             }
