@@ -16,7 +16,7 @@ public class Player extends Mob{
     private String username;
 
     public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
-        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),2, true, scale,
+        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),2, false, scale,
                 new Health(100), new Shield(0, 0, 100), true, true, 1, true, EntityType.PLAYER);
         this.input = input;
         this.scale = scale;

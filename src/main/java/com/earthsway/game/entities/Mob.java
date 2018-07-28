@@ -54,12 +54,6 @@ public abstract class Mob extends Entity{
     }
 
     public void move(int xa, int ya) {
-        if (!canMoveDiagonal && xa != 0 && ya != 0) {
-            move(xa, 0);//TODO Make this work
-            move(0, ya);
-            numSteps--;
-            return;
-        }
         //TODO Integrate damage/hit into diagonal
         numSteps++;
         if (!hasCollided(xa, ya)) {

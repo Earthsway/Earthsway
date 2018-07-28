@@ -1,5 +1,7 @@
 package com.earthsway.game;
 
+import com.earthsway.game.utilities.Sound;
+
 import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class GameLauncher extends Applet {
     private static Main main = new Main();
-    public static final boolean DEBUG_MODE = true;
+    public static final boolean DEBUG_MODE = false;
 
     @Override
     public void init(){

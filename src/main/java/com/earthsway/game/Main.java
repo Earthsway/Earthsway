@@ -15,12 +15,16 @@ import com.earthsway.game.level.Level;
 import com.earthsway.game.net.GameClient;
 import com.earthsway.game.net.GameServer;
 import com.earthsway.game.net.packets.Packet00Login;
+import com.earthsway.game.utilities.Sound;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
 
 public class Main extends Canvas implements Runnable{
 
@@ -75,7 +79,6 @@ public class Main extends Canvas implements Runnable{
 
         screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
         input = new InputHandler(this);
-
         level = new Level("/levels/small_test_level.png");
 
         if(!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to use your discord?\nThis will only work if discord is running.\n(RECOMMENDED YES)") == 0){runDiscordRPC();
@@ -97,14 +100,18 @@ public class Main extends Canvas implements Runnable{
         }
         //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
+        Sound.main_menu(false, 0);
     }
 
     private boolean loadRecommendedSettings = false;
-
+    private static MediaPlayer mainMenu;
     public synchronized void start() {
         running = true;
         thread = new Thread(this, NAME + "_main");
         thread.start();
+
+        Sound.main_menu(true, 0.6f);
+
         loadRecommendedSettings = JOptionPane.showConfirmDialog(this, "Do you want to load Recommended Settings?\n(RECOMMENDED YES)") == 0;
 
         if (!loadRecommendedSettings && JOptionPane.showConfirmDialog(this, "Do you want to run the server?\n(RECOMMENDED NO)") == 0) {
