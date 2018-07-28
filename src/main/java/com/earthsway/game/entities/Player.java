@@ -16,7 +16,7 @@ public class Player extends Mob{
     private String username;
 
     public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
-        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),1, true, scale,
+        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),2, true, scale,
                 new Health(100), new Shield(0, 0, 100), true, true, 1, true, EntityType.PLAYER);
         this.input = input;
         this.scale = scale;
@@ -96,6 +96,9 @@ public class Player extends Mob{
         int yOffset = y - modifier/2 - 4;
 
         this.renderWaterSplash(screen, xOffset, yOffset, modifier,flipTop, flipBottom,xTile,yTile, color);
+
+        screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
+        screen.render(xOffset + modifier - (modifier* flipTop), yOffset, (xTile + 1) + yTile*32, color,flipTop, scale);
 
         if(username != null){
             Font.render(username, screen, xOffset - ((username.length() -1 )/ 2 * 8), yOffset - 10, Colors.get(-1, -1, -1, 555));

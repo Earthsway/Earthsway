@@ -20,12 +20,13 @@ public class Worker extends Mob {
     private boolean followPlayer;
 
     public Worker(Level level, int x, int y, boolean followPlayer) {
-        super(level, null, x, y, new int[]{0,6,3,6}, new Coords(100, 100),1, false, 1,
+        super(level, null, x, y, new int[]{0,6,3,6}, new Coords(100, 100),1, false, 2,
                 new Health(100), new Shield(0, 0, 100), false, true, 1, true, EntityType.WORKER);
         this.followPlayer = followPlayer;
     }
 
     public void tick() {
+        this.color = Colors.get(-1, 180, 1, 543);
         //movement = randomMovementAI(x, y, xa, ya, this.tickCount);
         //this.xa = movement[0];
         //this.ya = movement[1];
@@ -57,5 +58,9 @@ public class Worker extends Mob {
         int yOffset = y - modifier/2 - 4;
 
         this.renderWaterSplash(screen, xOffset, yOffset, modifier,flipTop, flipBottom,xTile,yTile, color);
+
+        screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
+        screen.render(xOffset + modifier - (modifier* flipTop), yOffset, (xTile + 1) + yTile*32, color,flipTop, scale);
+
     }
 }

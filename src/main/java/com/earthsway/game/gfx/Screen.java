@@ -33,6 +33,7 @@ public class Screen {
     public void render(int xPos, int yPos, int tile, int color, int mirrorDir) {render(xPos, yPos, tile, color, mirrorDir, 1);}
 
     public void render(int xPos, int yPos, int tile, int color, int mirrorDir, int scale) {
+
         xPos -= xOffset;
         yPos -= yOffset;
 

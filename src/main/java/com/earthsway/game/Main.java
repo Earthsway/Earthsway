@@ -24,9 +24,9 @@ import java.awt.image.DataBufferInt;
 
 public class Main extends Canvas implements Runnable{
 
-    public static final int WIDTH = 160;
+    public static final int WIDTH = 400;//192
     public static final int HEIGHT = WIDTH/17*9;
-    public static final int SCALE = 10;
+    public static final int SCALE = 4;//8
     public static final String NAME = "Earthsway";
     public static Main main;
     public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
@@ -89,6 +89,8 @@ public class Main extends Canvas implements Runnable{
             player = new PlayerMP(level, 100, 100, input, "", null, -1);
         }
         level.addEntity(player);
+        Worker worker = new Worker(level, 90, 90, true);
+        level.addEntity(worker);
         Packet00Login loginPacket = new Packet00Login(player.getUsername(), player.x, player.y);
         if(socketServer != null){
             socketServer.addConnection((PlayerMP) player, loginPacket);

@@ -55,11 +55,12 @@ public abstract class Mob extends Entity{
 
     public void move(int xa, int ya) {
         if (!canMoveDiagonal && xa != 0 && ya != 0) {
-            move(xa, 0);
+            move(xa, 0);//TODO Make this work
             move(0, ya);
             numSteps--;
             return;
         }
+        //TODO Integrate damage/hit into diagonal
         numSteps++;
         if (!hasCollided(xa, ya)) {
             if (ya < 0) movingDir = 0;
@@ -179,12 +180,9 @@ public abstract class Mob extends Entity{
             else if(30 <= this.tickCount % 60 && this.tickCount % 60 < 45) waterColor = Colors.get(-1, 115, -1, 225);
             else{waterColor = Colors.get(-1, 225, 115, -1); yOffset -= 1;}
 
-            screen.render(xOffset, yOffset + 3, 31 + 31 * 32, waterColor, 0x00, 1);
-            screen.render(xOffset + 8, yOffset + 3, 31 + 31 * 32, waterColor, 0x01, 1);
+            screen.render(xOffset + this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x00, this.scale);
+            screen.render(xOffset + 8 * this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x01, this.scale);
         }
-
-        screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
-        screen.render(xOffset + modifier - (modifier* flipTop), yOffset, (xTile + 1) + yTile*32, color,flipTop, scale);
 
         if(!this.swimming){
             screen.render(xOffset  + (modifier* flipBottom), yOffset + modifier, xTile + (yTile + 1)*32, color, flipBottom, scale);
