@@ -2,6 +2,7 @@ package com.earthsway.game.entities;
 
 import com.earthsway.game.InputHandler;
 import com.earthsway.game.Main;
+import com.earthsway.game.level.tiles.Tile;
 import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Font;
@@ -46,6 +47,22 @@ public class Player extends Mob{
             respawn();
         }
         sendDiscordData();
+        soundManager();
+    }
+
+
+    private Tile lastSoundTile = null;
+    private int soundWait = 0;
+    private void soundManager() {
+        if(soundWait >= 20){
+            if(lastSoundTile != null && this.onTiles[0].getSoundType() != lastSoundTile.getSoundType()){
+            new Sound(this.onTiles[0].getSoundType(), 0.02f);
+            new Sound(lastSoundTile.getSoundType(), 0.01f);
+            }
+            lastSoundTile = this.onTiles[0];
+            soundWait = 0;
+        }
+        else soundWait ++;
     }
 
     @Override

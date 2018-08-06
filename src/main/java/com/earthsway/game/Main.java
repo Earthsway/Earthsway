@@ -7,7 +7,7 @@ import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.entities.Worker;
-import com.earthsway.game.utilities.DiscordData;
+import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Hud;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
@@ -15,22 +15,18 @@ import com.earthsway.game.level.Level;
 import com.earthsway.game.net.GameClient;
 import com.earthsway.game.net.GameServer;
 import com.earthsway.game.net.packets.Packet00Login;
-import com.earthsway.game.utilities.Sound;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
 
 public class Main extends Canvas implements Runnable{
 
-    public static final int WIDTH = 400;//192
+    public static final int WIDTH = 400;//400
     public static final int HEIGHT = WIDTH/17*9;
-    public static final int SCALE = 4;//8
+    public static final int SCALE = 4;//4
     public static final String NAME = "Earthsway";
     public static Main main;
     public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
@@ -100,17 +96,21 @@ public class Main extends Canvas implements Runnable{
         }
         //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
-        Sound.main_menu(false, 0);
+        new Sound(SoundType.MAIN_MENU, 0f);
+
+        new Sound(SoundType.CLASSIC, 0.7f);
+        new Sound(SoundType.CLASSIC, 0.1f);
+        new Sound(SoundType.CAVE, 0.7f);
+        new Sound(SoundType.CAVE, 0.1f);
     }
 
     private boolean loadRecommendedSettings = false;
-    private static MediaPlayer mainMenu;
     public synchronized void start() {
         running = true;
         thread = new Thread(this, NAME + "_main");
         thread.start();
 
-        Sound.main_menu(true, 0.6f);
+        new Sound(SoundType.MAIN_MENU, 0.65f);
 
         loadRecommendedSettings = JOptionPane.showConfirmDialog(this, "Do you want to load Recommended Settings?\n(RECOMMENDED YES)") == 0;
 
@@ -124,6 +124,7 @@ public class Main extends Canvas implements Runnable{
     }
 
     public synchronized void stop(){
+        Sound.stopAllSounds();
         discordRPC.Discord_Shutdown();
         running = false;
         try {

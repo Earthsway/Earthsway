@@ -2,6 +2,7 @@ package com.earthsway.game.level.tiles;
 
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
+import com.earthsway.game.utilities.SoundType;
 
 public class BaseTile extends Tile{
 
@@ -9,7 +10,13 @@ public class BaseTile extends Tile{
     protected int tileColor;
 
     public BaseTile(int id, int x, int y, int tileColor, int levelColor) {
-        super(id, false, false, false, false, -0, levelColor);
+        super(id, false, false, false, false, -0, levelColor, null);
+        this.tileId = x + y * 32;
+        this.tileColor = tileColor;
+    }
+
+    public BaseTile(int id, int x, int y, int tileColor, int levelColor, SoundType soundType) {
+        super(id, false, false, false, false, -0, levelColor, soundType);
         this.tileId = x + y * 32;
         this.tileColor = tileColor;
     }

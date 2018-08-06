@@ -13,6 +13,7 @@ com\earthsway\game\utilities\Health.class
 com\earthsway\game\net\GameClient$1.class
 com\earthsway\game\gfx\Colors.class
 com\earthsway\game\gfx\Screen.class
+com\earthsway\game\utilities\ClipData.class
 com\earthsway\game\level\tiles\BasicDamagingTile.class
 com\earthsway\game\level\tiles\BasicSolidTile.class
 com\earthsway\game\WindowHandler.class
@@ -33,6 +34,7 @@ com\earthsway\game\GameLauncher.class
 com\earthsway\game\Main.class
 com\earthsway\game\gfx\SpriteSheet.class
 com\earthsway\game\net\packets\Packet00Login.class
+com\earthsway\game\utilities\SoundType.class
 com\earthsway\game\entities\Entity.class
 com\earthsway\game\net\GameClient.class
 com\earthsway\game\level\tiles\BaseTile.class
