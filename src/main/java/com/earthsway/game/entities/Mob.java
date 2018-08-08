@@ -7,8 +7,7 @@ import com.earthsway.game.level.Level;
 import com.earthsway.game.level.Node;
 import com.earthsway.game.level.tiles.Tile;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public abstract class Mob extends Entity{
 
@@ -33,8 +32,10 @@ public abstract class Mob extends Entity{
     protected Coords respawnCoords;
     protected int[] collisionBox;
     protected int tickCount = 0;
+    protected Biome biome;
 
-    public Mob(Level level, String name, int x, int y, int[] collisionBox, Coords respawnCoords, int speed, boolean canMoveDiagonal, int scale, Health health, Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType) {
+    public Mob(Level level, String name, int x, int y, int[] collisionBox, Coords respawnCoords, int speed, boolean canMoveDiagonal, int scale, Health health,
+               Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType) {
         super(level);
         this.name = name;
         this.x = x;
@@ -81,6 +82,7 @@ public abstract class Mob extends Entity{
 
     public void tick() {
         this.updateTiles();
+        this.updateBiome();
         Tile t = null;
         for (Tile tile : this.onTiles) {
             if (tile.isConstantDamaging()){t = tile; break;}
@@ -93,6 +95,29 @@ public abstract class Mob extends Entity{
 
         this.currentHitCooldown -= 0.05;//default 0.05
         this.tickCount++;
+    }
+
+    private void updateBiome() {
+        HashMap<Biome, Integer> biomes = new HashMap<>();
+        for (Tile tile : this.onTiles) {
+            if (tile != null && tile.getBiome() != null) {
+                Biome tBiome = tile.getBiome();
+                biomes.merge(tBiome, 1, (a, b) -> a + b);
+            }
+        }
+        try {
+        final int biggest = Collections.max(biomes.values());
+        Biome out = null;
+        for(Biome b : biomes.keySet()){
+            if(biomes.get(b) == biggest){
+                out = b;
+            }
+        }
+        this.biome = out;
+        }
+        catch (NoSuchElementException ignore){
+            this.biome = null;
+        }
     }
 
     protected Tile shouldBeDamaged(){
@@ -247,6 +272,7 @@ public abstract class Mob extends Entity{
     public double getHitCooldown() {return hitCooldown;}
     public double getCurrentHitCooldown() {return currentHitCooldown;}
     public boolean canRespawnWithShield() {return respawnWithShield;}
+    public Biome getBiome() {return biome;}
 
     public void setNumSteps(int numSteps) {this.numSteps = numSteps;}
     public void setMoving(boolean moving) {isMoving = moving;}

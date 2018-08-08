@@ -16,21 +16,16 @@ public class Sound {
         else if(volume == 0f) closeClip(soundType);
         else if(volume == 0.01f) pauseClip(soundType);
         else if(volume == 0.02f) resumeClip(soundType);
-        else if(soundType == SoundType.CLASSIC)inGameClassic(volume);
-        else if(soundType == SoundType.MAIN_MENU)main_menu(volume);
-        else if(soundType == SoundType.CAVE)inGameCave(volume);
+        else playSound(soundType, volume, -0);
     }
 
     private void pauseClip(SoundType soundType) {
-            clips.get(soundType).clip.stop();
-        clips.put(soundType, new ClipData(clips.get(soundType).clip, clips.get(soundType).clip.getMicrosecondPosition()));
+        clips.put(soundType, new ClipData(clips.get(soundType).clip, clips.get(soundType).clip.getMicrosecondPosition(), clips.get(soundType).volume));
+        clips.get(soundType).clip.stop();
     }
 
     private void resumeClip(SoundType soundType) {
-
-        clips.get(soundType).clip.start();
-        clips.get(soundType).clip.setMicrosecondPosition(clips.get(soundType).clipTime);
-            clips.put(soundType, new ClipData(clips.get(soundType).clip, clips.get(soundType).clip.getMicrosecondPosition()));
+        playSound(soundType, -0f, clips.get(soundType).clipTime);
     }
 
     public static void stopAllSounds() {
@@ -40,83 +35,32 @@ public class Sound {
         clips = new HashMap<>();
     }
 
-    //Volume 0f - 1f
     //Convert all audio clips in Audacity
-    private void main_menu(float volume) {
-        try {
-            if(clips.containsKey(SoundType.MAIN_MENU) && clips.get(SoundType.MAIN_MENU) != null) closeClip(SoundType.MAIN_MENU);
-            Clip clip;
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResource("/sounds/main_menu.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float range = floatControl.getMaximum() - floatControl.getMinimum();
-            float gain = (range * volume) + floatControl.getMinimum();
-            floatControl.setValue(gain);
-            clips.put(SoundType.CLASSIC, new ClipData(clip));
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            Utilities.errorReport(e, Sound.class);
-        }
-    }
 
-    private void inGameClassic(float volume) {
+    private void playSound(SoundType soundType, float volume, long time){
         try {
-            if(clips.containsKey(SoundType.CLASSIC) && clips.get(SoundType.CLASSIC) != null)closeClip(SoundType.CLASSIC);
-            Clip clip;
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResource("/sounds/music1.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float range = floatControl.getMaximum() - floatControl.getMinimum();
-            float gain = (range * volume) + floatControl.getMinimum();
-            floatControl.setValue(gain);
-            clips.put(SoundType.CLASSIC, new ClipData(clip));
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            Utilities.errorReport(e, Sound.class);
-        }
-    }
+            if(clips.containsKey(soundType) && clips.get(soundType) != null) closeClip(soundType);
 
-    private void inGameBattle(float volume) {
-        try {
-            if(clips.containsKey(SoundType.BATTLE) && clips.get(SoundType.BATTLE) != null)closeClip(SoundType.BATTLE);
-            Clip clip;
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResource("/sounds/battle1.wav"));
-            clip = AudioSystem.getClip();
-            clip.open(inputStream);
-            clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-            FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float range = floatControl.getMaximum() - floatControl.getMinimum();
-            float gain = (range * volume) + floatControl.getMinimum();
-            floatControl.setValue(gain);
-            clips.put(SoundType.BATTLE, new ClipData(clip));
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
-            e.printStackTrace();
-            Utilities.errorReport(e, Sound.class);
-        }
-    }
+            //if(clips.get(soundType) != null) volume = clips.get(soundType).volume;
 
-    private void inGameCave(float volume) {
-        try {
-            if(clips.containsKey(SoundType.CAVE) && clips.get(SoundType.CAVE) != null)closeClip(SoundType.CAVE);
             Clip clip;
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResource("/sounds/cave.wav"));
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(soundType.getAsResource(0));
             clip = AudioSystem.getClip();
             clip.open(inputStream);
+            if(time != -0) clip.setMicrosecondPosition(time);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+            if(volume != -0f){
             FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             float range = floatControl.getMaximum() - floatControl.getMinimum();
             float gain = (range * volume) + floatControl.getMinimum();
             floatControl.setValue(gain);
-            clips.put(SoundType.CAVE, new ClipData(clip));
-        } catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
+            }else{
+                volume = ((FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN)).getValue();
+            }
+            clips.put(soundType, new ClipData(clip, time, volume));
+        } catch (Exception e) {
             e.printStackTrace();
             Utilities.errorReport(e, Sound.class);
         }

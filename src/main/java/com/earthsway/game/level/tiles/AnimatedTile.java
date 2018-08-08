@@ -1,5 +1,7 @@
 package com.earthsway.game.level.tiles;
 
+import com.earthsway.game.utilities.Biome;
+
 public class AnimatedTile extends BaseTile{
 
     private int[][] animationTileCoords;
@@ -15,10 +17,27 @@ public class AnimatedTile extends BaseTile{
         this.animationSwitchDelay = animationSwitchDelay;
         this.damaging = false;
     }
+    public AnimatedTile(int id, int[][] animationCoords, int tileColor, int levelColor, int animationSwitchDelay, Biome biome) {
+        super(id, animationCoords[0][0], animationCoords[0][1], tileColor, levelColor, biome);
+        this.animationTileCoords = animationCoords;
+        this.currentAnimationIndex = 0;
+        this.lastIterationTime = System.currentTimeMillis();
+        this.animationSwitchDelay = animationSwitchDelay;
+        this.damaging = false;
+    }
 
 
     public AnimatedTile(int id, int[][] animationCoords, int tileColor, int levelColor, int animationSwitchDelay, boolean damaging) {
         super(id, animationCoords[0][0], animationCoords[0][1], tileColor, levelColor);
+        this.animationTileCoords = animationCoords;
+        this.currentAnimationIndex = 0;
+        this.lastIterationTime = System.currentTimeMillis();
+        this.animationSwitchDelay = animationSwitchDelay;
+        this.damaging = damaging;
+    }
+
+    public AnimatedTile(int id, int[][] animationCoords, int tileColor, int levelColor, int animationSwitchDelay, boolean damaging, Biome biome) {
+        super(id, animationCoords[0][0], animationCoords[0][1], tileColor, levelColor, biome);
         this.animationTileCoords = animationCoords;
         this.currentAnimationIndex = 0;
         this.lastIterationTime = System.currentTimeMillis();

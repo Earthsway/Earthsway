@@ -82,9 +82,9 @@ public class Main extends Canvas implements Runnable{
             player = new PlayerMP(level, 100, 100, input, discordUser.username(), null, -1);}
         else player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username.\n(RECOMMENDED CANCEL)"), null, -1);}
         else if (!loadRecommendedSettings)player = new PlayerMP(level, 100, 100, input, JOptionPane.showInputDialog(this, "Please Enter A Username.\n(RECOMMENDED CANCEL)"), null, -1);
-
+        initSounds();
         if(loadRecommendedSettings){
-            runDiscordRPC();
+           // runDiscordRPC();
             player = new PlayerMP(level, 100, 100, input, "", null, -1);
         }
         level.addEntity(player);
@@ -97,11 +97,15 @@ public class Main extends Canvas implements Runnable{
         //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
         new Sound(SoundType.MAIN_MENU, 0f);
+    }
 
-        new Sound(SoundType.CLASSIC, 0.7f);
-        new Sound(SoundType.CLASSIC, 0.1f);
-        new Sound(SoundType.CAVE, 0.7f);
-        new Sound(SoundType.CAVE, 0.1f);
+    private void initSounds() {
+        for (SoundType t : SoundType.values()) {
+            if (t.getSounds() != null && t.getSounds().length > 0 && t.getAsResource(0) != null && t.shouldInit()) {
+                new Sound(t, 0.7f);
+                new Sound(t, 0.01f);
+            }
+        }
     }
 
     private boolean loadRecommendedSettings = false;
@@ -173,7 +177,8 @@ public class Main extends Canvas implements Runnable{
 
             if(System.currentTimeMillis() - lastTimer >= 1000){
                 lastTimer += 1000;
-                debug(DebugLevel.INFO,"{" + frames + " frames, " + ticks + " Ticks}");
+                //debug(DebugLevel.INFO,"{" + frames + " frames, " + ticks + " Ticks}");
+                debug(DebugLevel.INFO, "{" + frames + " frames, " + ticks + " Ticks} Biome: " + player.getBiome());
                 frames = 0;
                 ticks = 0;
             }

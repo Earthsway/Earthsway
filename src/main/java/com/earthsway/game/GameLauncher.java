@@ -9,7 +9,7 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class GameLauncher extends Applet {
     private static Main main = new Main();
-    public static final boolean DEBUG_MODE = false;
+    public static final boolean DEBUG_MODE = true;
 
     @Override
     public void init(){
