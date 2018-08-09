@@ -51,7 +51,7 @@ public class Main extends Canvas implements Runnable{
     public GameClient socketClient;
     public GameServer socketServer;
 
-    public boolean debugMode;
+    public boolean debugMode = false;
 
     public static DiscordRPC discordRPC = DiscordRPC.INSTANCE;
     public static DiscordData discordUser = null;
@@ -101,7 +101,7 @@ public class Main extends Canvas implements Runnable{
 
     private void initSounds() {
         for (SoundType t : SoundType.values()) {
-            if (t.getSounds() != null && t.getSounds().length > 0 && t.getAsResource(0) != null && t.shouldInit()) {
+            if (t.getSounds() != null && t.getSounds().length > 0 && t.getAsResource(0) != null && t.shouldInit()) {//TODO Make it so it inits all sounds in file list. Right now it inits only the first.
                 new Sound(t, 0.7f);
                 new Sound(t, 0.01f);
             }
@@ -292,6 +292,21 @@ public class Main extends Canvas implements Runnable{
                 }
 
         }
+    }
+
+    private Thread toggleDebugThread = null;
+    public void toggleDebug() {
+        if(toggleDebugThread != null && toggleDebugThread.isAlive()){
+            toggleDebugThread.interrupt();
+            toggleDebugThread = null;
+        }
+        toggleDebugThread = new Thread(() -> {
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException ignore) {}
+            debugMode = !debugMode;
+        }, "toggleDebug");
+        toggleDebugThread.start();
     }
 
     public static enum DebugLevel{

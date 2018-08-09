@@ -30,6 +30,7 @@ public class Player extends Mob{
         int xa = 0;
         int ya = 0;
         if(input != null) {
+            if(input.F3.isPressed()) Main.main.toggleDebug();
             if (input.up.isPressed()) ya--;
             if (input.down.isPressed()) ya++;
             if (input.left.isPressed()) xa--;

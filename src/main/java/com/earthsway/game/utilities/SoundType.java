@@ -3,13 +3,14 @@ package com.earthsway.game.utilities;
 import com.earthsway.game.Main;
 
 import java.net.URL;
-import java.util.ResourceBundle;
 
 public enum SoundType {
     BATTLE(false, null),
     MAIN_MENU(false, "/sounds/main_menu.wav"),
-    CAVE(true, "/sounds/cave.wav"),
+    CAVE(true, "/sounds/cave1.wav", "/sounds/cave2.wav"),
     CLASSIC(true, "/sounds/music1.wav");
+
+    //TODO be able to call what ever sound wanted
 
     String[] sounds;
     boolean init;
@@ -17,4 +18,5 @@ public enum SoundType {
     public boolean shouldInit(){return init;}
     public URL getAsResource(int index) {return Main.class.getResource(sounds[index]);}
     public String[] getSounds() {return sounds;}
+
 }

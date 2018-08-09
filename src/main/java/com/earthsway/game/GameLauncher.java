@@ -9,7 +9,6 @@ import java.awt.*;
 @SuppressWarnings("serial")
 public class GameLauncher extends Applet {
     private static Main main = new Main();
-    public static final boolean DEBUG_MODE = true;
 
     @Override
     public void init(){
@@ -18,7 +17,6 @@ public class GameLauncher extends Applet {
         setMaximumSize(Main.DIMENSIONS);
         setMinimumSize(Main.DIMENSIONS);
         setPreferredSize(Main.DIMENSIONS);
-        main.debugMode = DEBUG_MODE;
     }
 
     @Override
@@ -49,7 +47,6 @@ public class GameLauncher extends Applet {
         main.frame.setVisible(true);
 
         main.windowHandler = new WindowHandler(main);
-        main.debugMode = DEBUG_MODE;
 
         main.start();
     }
