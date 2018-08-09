@@ -5,6 +5,8 @@ import com.earthsway.game.Main;
 import java.net.URL;
 
 public enum SoundType {
+    @SuppressWarnings({"all"})
+    //Initializing Only Required For Large Clips.
     BATTLE(false, null),
     MAIN_MENU(false, "/sounds/main_menu.wav"),
     CAVE(true, "/sounds/cave1.wav", "/sounds/cave2.wav"),
@@ -18,5 +20,7 @@ public enum SoundType {
     public boolean shouldInit(){return init;}
     public URL getAsResource(int index) {return Main.class.getResource(sounds[index]);}
     public String[] getSounds() {return sounds;}
+
+    public String getSound(int index) {return getSounds()[index +-1];}
 
 }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "all"})
 public class GameLauncher extends Applet {
     private static Main main = new Main();
 

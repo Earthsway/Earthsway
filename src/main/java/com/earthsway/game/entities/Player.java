@@ -55,10 +55,17 @@ public class Player extends Mob{
     private Tile lastSoundTile = null;
     private int soundWait = 0;
     private void soundManager() {
-        if(soundWait >= 20){
-            if(lastSoundTile != null && this.onTiles[0].getSoundType() != lastSoundTile.getSoundType()){
-            new Sound(this.onTiles[0].getSoundType(), 0.02f);
-            new Sound(lastSoundTile.getSoundType(), 0.01f);
+        if(soundWait >= 20
+        ){
+            SoundType st = updateSound();
+            if(lastSoundTile != null && st != lastSoundTile.getSoundType()) {
+                if (st.name().equalsIgnoreCase("cave") && Sound.caveSound >= 50) {
+                    new Sound(st, 1, 0.02f);
+                    new Sound(lastSoundTile.getSoundType(), 1, 0.01f);
+                } else {
+                    new Sound(st, 0, 0.02f);
+                    new Sound(lastSoundTile.getSoundType(), 0, 0.01f);
+                }
             }
             lastSoundTile = this.onTiles[0];
             soundWait = 0;

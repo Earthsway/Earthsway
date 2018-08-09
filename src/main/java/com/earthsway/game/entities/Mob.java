@@ -119,6 +119,28 @@ public abstract class Mob extends Entity{
             this.biome = null;
         }
     }
+    protected SoundType updateSound() {
+        HashMap<SoundType, Integer> sounds = new HashMap<>();
+        for (Tile tile : this.onTiles) {
+            if (tile != null && tile.getSoundType() != null) {
+                SoundType tSound = tile.getSoundType();
+                sounds.merge(tSound, 1, (a, b) -> a + b);
+            }
+        }
+        try {
+        final int biggest = Collections.max(sounds.values());
+        SoundType out = null;
+        for(SoundType s : sounds.keySet()){
+            if(sounds.get(s) == biggest){
+                out = s;
+            }
+        }
+        return out;
+        }
+        catch (NoSuchElementException ignore){
+            return null;
+        }
+    }
 
     protected Tile shouldBeDamaged(){
         for (Tile tile : this.onTiles) {if (tile != null && tile.isDamaging()){return tile;}}
