@@ -57,13 +57,13 @@ public class Player extends Mob{
     private void soundManager() {
         if(soundWait >= 20){
             SoundType st = updateSound();
-            if(lastSoundTile != null && st != lastSoundTile.getSoundType()) {
+            if(lastSoundTile == null || st != lastSoundTile.getSoundType()) {
                 if (st.name().equalsIgnoreCase("cave") && Sound.caveSound >= 50) {
                     new Sound(st, 1, 0.02f);
-                    new Sound(lastSoundTile.getSoundType(), 1, 0.01f);
+                    if(lastSoundTile != null) new Sound(lastSoundTile.getSoundType(), 1, 0.01f);
                 } else {
                     new Sound(st, 0, 0.02f);
-                    new Sound(lastSoundTile.getSoundType(), 0, 0.01f);
+                    if(lastSoundTile != null) new Sound(lastSoundTile.getSoundType(), 0, 0.01f);
                 }
             }
             lastSoundTile = this.onTiles[0];
