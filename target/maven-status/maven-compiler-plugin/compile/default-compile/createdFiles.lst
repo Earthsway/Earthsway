@@ -5,6 +5,7 @@ com\earthsway\game\level\tiles\Tile.class
 com\earthsway\game\entities\PlayerMP.class
 com\earthsway\game\net\packets\Packet$PacketTypes.class
 com\earthsway\game\utilities\MovingDirection.class
+com\earthsway\game\utilities\Biome.class
 com\earthsway\game\level\Level$1.class
 com\earthsway\game\net\GameServer.class
 com\earthsway\game\level\tiles\BasicSolidDamagingTile.class

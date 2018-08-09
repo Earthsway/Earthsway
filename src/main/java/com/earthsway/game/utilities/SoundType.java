@@ -7,17 +7,23 @@ import java.net.URL;
 public enum SoundType {
     @SuppressWarnings({"all"})
     //Initializing Only Required For Large Clips.
-    BATTLE(false, null),
-    MAIN_MENU(false, "/sounds/main_menu.wav"),
-    CAVE(true, "/sounds/cave1.wav", "/sounds/cave2.wav"),
-    CLASSIC(true, "/sounds/music1.wav");
-
-    //TODO be able to call what ever sound wanted
+    MAIN_MENU(false, true, "/sounds/main_menu.wav"),
+    BATTLE(false, true, ""),
+    CAVE(true, true, "/sounds/cave1.wav", "/sounds/cave2.wav"),
+    CLASSIC(true, true, "/sounds/music1.wav"),
+    SHIELD_POTION_DRINK(true, false, "/sounds/shieldPotionDrink.wav");
 
     String[] sounds;
     boolean init;
-    SoundType(boolean init, String... sounds) {this.sounds = sounds; this.init = init;}
+    boolean loop;
+
+    SoundType(boolean init, boolean loop, String... sounds) {
+        this.sounds = sounds;
+        this.init = init;
+        this.loop = loop;
+    }
     public boolean shouldInit(){return init;}
+    public boolean shouldLoop(){return loop;}
     public URL getAsResource(int index) {return Main.class.getResource(sounds[index]);}
     public String[] getSounds() {return sounds;}
 

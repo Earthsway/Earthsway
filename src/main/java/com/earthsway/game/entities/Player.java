@@ -55,8 +55,7 @@ public class Player extends Mob{
     private Tile lastSoundTile = null;
     private int soundWait = 0;
     private void soundManager() {
-        if(soundWait >= 20
-        ){
+        if(soundWait >= 20){
             SoundType st = updateSound();
             if(lastSoundTile != null && st != lastSoundTile.getSoundType()) {
                 if (st.name().equalsIgnoreCase("cave") && Sound.caveSound >= 50) {

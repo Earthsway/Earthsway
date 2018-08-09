@@ -12,31 +12,30 @@ import java.util.Random;
 public class Sound {
     public final static int caveSound = new Random().nextInt(100) + 1;
 
-
     private static HashMap<SoundType, ClipData> clips = new HashMap<>();
 
-    public Sound(SoundType soundType, int index, float volume){
+    public Sound(SoundType soundType, int index, float volume, boolean loop){
         if(soundType == null) stopAllSounds();
         else if(volume == 0f) closeClip(soundType);
         else if(volume == 0.01f) pauseClip(soundType);
         else if(volume == 0.02f) resumeClip(soundType, index);
-        else playSound(soundType, index, volume, -0);
+        else playSound(soundType, index, volume, -0, loop);
     }
+    public Sound(SoundType soundType, int index, float volume){
+        this(soundType, index, volume, false);
+    }
+
     public Sound(SoundType soundType, float volume){
-        if(soundType == null) stopAllSounds();
-        else if(volume == 0f) closeClip(soundType);
-        else if(volume == 0.01f) pauseClip(soundType);
-        else if(volume == 0.02f) resumeClip(soundType, 0);
-        else playSound(soundType, 0, volume, -0);
+        this(soundType, 0, volume, false);
     }
 
     private void pauseClip(SoundType soundType) {
-        clips.put(soundType, new ClipData(clips.get(soundType).clip, clips.get(soundType).clip.getMicrosecondPosition(), clips.get(soundType).volume));
+        clips.put(soundType, new ClipData(clips.get(soundType).clip, clips.get(soundType).clip.getMicrosecondPosition(), clips.get(soundType).volume, clips.get(soundType).loop));
         clips.get(soundType).clip.stop();
     }
 
     private void resumeClip(SoundType soundType, int index) {
-        playSound(soundType, index, clips.get(soundType).volume, clips.get(soundType).clipTime);
+        playSound(soundType, index, clips.get(soundType).volume, clips.get(soundType).clipTime, clips.get(soundType).loop);
     }
 
     public static void stopAllSounds() {
@@ -48,7 +47,7 @@ public class Sound {
 
     //Convert all audio clips in Audacity
 
-    private void playSound(SoundType soundType, int index, float volume, long time) {
+    private void playSound(SoundType soundType, int index, float volume, long time, boolean loop) {
         try {
             if (clips.containsKey(soundType) && clips.get(soundType) != null) closeClip(soundType);
 
@@ -58,14 +57,14 @@ public class Sound {
             clip.open(inputStream);
             if (time != -0) clip.setMicrosecondPosition(time);
             clip.start();
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            if(loop) clip.loop(Clip.LOOP_CONTINUOUSLY);
 
             FloatControl floatControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             float range = floatControl.getMaximum() - floatControl.getMinimum();
             float gain = (range * volume) + floatControl.getMinimum();
             floatControl.setValue(gain);
 
-            clips.put(soundType, new ClipData(clip, time, volume));
+            clips.put(soundType, new ClipData(clip, time, volume, loop));
         } catch (Exception e) {
             e.printStackTrace();
             Utilities.errorReport(e, Sound.class);

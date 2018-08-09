@@ -204,12 +204,31 @@ public abstract class Mob extends Entity{
             }
         }
     }
-
+    private boolean fortniteMode = false;
     protected void respawn(){
         this.x = respawnCoords.getX();
         this.y = respawnCoords.getY();
         this.health.setCurrentHealth(this.health.getMaxHealth());
-        if(this.respawnWithShield) this.shield.setCurrentShield(this.shield.getMaxShield());
+
+        if(this.respawnWithShield){
+            if (!fortniteMode)this.shield.setCurrentShield(this.shield.getMaxShield());
+            else if(this instanceof Player){
+                new Sound(SoundType.SHIELD_POTION_DRINK, 0, 0.7f);
+                new Thread(() -> {
+                    int i = 0;
+                    while (i < 100) {
+                        try {
+                            Thread.sleep(250);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        this.shield.addToCurrentShield(5);
+                        i += 5;
+                    }
+                }).start();
+            }
+
+        }
     }
 
     protected void renderWaterSplash(Screen screen, int xOffset, int yOffset, int modifier, int flipTop, int flipBottom, int xTile, int yTile, int color){

@@ -101,11 +101,11 @@ public class Main extends Canvas implements Runnable{
 
     private void initSounds() {
         for (SoundType t : SoundType.values()) {
-            if (t.getSounds() != null && t.getSounds().length > 0) {//TODO Make it so it inits all sounds in file list. Right now it inits only the first.
+            if (t.getSounds() != null && t.getSounds().length > 0 ) {
                 for(int i = 0; i < t.getSounds().length; i++) {
-                    if(t.getAsResource(i) != null && t.getSounds()[i] != null || t.getSounds()[i] != "") {
-                        new Sound(t, i, 0.7f);
-                        new Sound(t, i, 0.01f);
+                    if(t.getAsResource(i) != null && t.getSounds()[i] != null && t.getSounds()[i] != "") {
+                        new Sound(t, i, 0.65f, t.shouldLoop());
+                        new Sound(t, i, 0.01f, t.shouldLoop());
                     }
                 }
             }
