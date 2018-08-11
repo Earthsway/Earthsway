@@ -11,7 +11,9 @@ public enum SoundType {
     BATTLE(false, true, ""),
     CAVE(true, true, "/sounds/cave1.wav", "/sounds/cave2.wav"),
     CLASSIC(true, true, "/sounds/music1.wav"),
-    SHIELD_POTION_DRINK(true, false, "/sounds/shieldPotionDrink.wav");
+    SHIELD_POTION_DRINK(true, false, "/sounds/shieldPotionDrink.wav"),
+    TILE_STONE_STEP(true, false, "/sounds/tile/stone/step.wav"),
+    ;
 
     String[] sounds;
     boolean init;
