@@ -62,6 +62,7 @@ public abstract class Mob extends Entity{
             if (ya > 0) movingDir = 1;
             if (xa < 0) movingDir = 2;
             if (xa > 0) movingDir = 3;
+
             x += xa * speed;
             y += ya * speed;
             if (this.damageable && this.currentHitCooldown <= 0.00) {

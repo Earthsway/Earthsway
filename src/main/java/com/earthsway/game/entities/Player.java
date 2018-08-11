@@ -17,7 +17,7 @@ public class Player extends Mob{
     private String username;
 
     public Player(Level level, int x, int y, InputHandler input, int scale, String username) {
-        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),2, false, scale,
+        super(level, "Player", x, y, new int[]{0,6,3,6}, new Coords(100, 100),2, true, scale,
                 new Health(100), new Shield(0, 0, 100), true, true, 1, true, EntityType.PLAYER);
         this.input = input;
         this.scale = scale;
@@ -30,11 +30,20 @@ public class Player extends Mob{
         int xa = 0;
         int ya = 0;
         if(input != null) {
+            if(this.canMoveDiagonal){
             if(input.F3.isPressed()) Main.main.toggleDebug();
             if (input.up.isPressed()) ya--;
             if (input.down.isPressed()) ya++;
             if (input.left.isPressed()) xa--;
             if (input.right.isPressed()) xa++;
+            }
+            else{
+                if(input.F3.isPressed()) Main.main.toggleDebug();
+                if (input.up.isPressed()) ya--;
+                else if (input.down.isPressed()) ya++;
+                else if (input.left.isPressed()) xa--;
+                else if (input.right.isPressed()) xa++;
+            }
         }
         if(xa != 0 || ya != 0){
             move(xa,ya);
