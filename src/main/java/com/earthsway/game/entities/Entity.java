@@ -4,6 +4,8 @@ import com.earthsway.game.utilities.EntityType;
 import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 
+import java.awt.*;
+
 public abstract class Entity {
 
     public int x,y;
@@ -19,7 +21,7 @@ public abstract class Entity {
     }
 
     public abstract void tick();
-    public abstract void render(Screen screen);
+    public abstract void render(Graphics g);
 
     public EntityType getEntityType() {return entityType;}
 }

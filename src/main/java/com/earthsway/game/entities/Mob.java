@@ -7,7 +7,9 @@ import com.earthsway.game.level.Level;
 import com.earthsway.game.level.Node;
 import com.earthsway.game.level.tiles.Tile;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public abstract class Mob extends Entity{
 
@@ -232,15 +234,8 @@ public abstract class Mob extends Entity{
         }
     }
 
-    protected void renderWaterSplash(Screen screen, int xOffset, int yOffset, int modifier, int flipTop, int flipBottom, int xTile, int yTile, int color){
+    protected void renderWaterSplash(Graphics g, int xOffset, int yOffset, int modifier, int flipTop, int flipBottom, int xTile, int yTile, int color){
         if(this.swimming){
-            int waterColor;
-            yOffset += 4;
-            if(this.tickCount % 60 < 15)waterColor = Colors.get(-1, -1, 225, -1);
-            else if(15 <= this.tickCount % 60 && this.tickCount % 60 < 30){ waterColor = Colors.get(-1, 225, 115, -1);  yOffset -= 1;}
-            else if(30 <= this.tickCount % 60 && this.tickCount % 60 < 45) waterColor = Colors.get(-1, 115, -1, 225);
-            else{waterColor = Colors.get(-1, 225, 115, -1); yOffset -= 1;}
-
             screen.render(xOffset + this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x00, this.scale);
             screen.render(xOffset + 8 * this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x01, this.scale);
         }

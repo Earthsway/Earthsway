@@ -7,8 +7,8 @@ import java.awt.event.WindowListener;
 
 public class WindowHandler implements WindowListener {
 
-    private final Main main;
-    public WindowHandler(Main main){
+    private final Game main;
+    public WindowHandler(Game main){
         this.main = main;
         this.main.frame.addWindowListener(this);
     }

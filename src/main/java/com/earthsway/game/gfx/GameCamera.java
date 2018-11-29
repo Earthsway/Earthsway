@@ -1,4 +1,4 @@
 package com.earthsway.game.gfx;
 
-public class SpriteSheet {
+public class GameCamera {
 }

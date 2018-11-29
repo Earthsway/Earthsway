@@ -1,7 +1,7 @@
 package com.earthsway.game.net;
 
 import com.earthsway.Utilities;
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.net.packets.Packet;
 import com.earthsway.game.net.packets.Packet00Login;
@@ -10,14 +10,13 @@ import com.earthsway.game.net.packets.Packet02Move;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 
 public class GameClient extends Thread{
     private InetAddress ipAddress;
     private DatagramSocket socket;
-    private Main main;
+    private Game main;
 
-    public GameClient(Main main, String ipAddress){
+    public GameClient(Game main, String ipAddress){
         this.main = main;
         try {
             this.socket = new DatagramSocket();

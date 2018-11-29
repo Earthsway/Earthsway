@@ -1,6 +1,6 @@
 package com.earthsway.game.net.packets;
 
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 import com.earthsway.game.net.GameClient;
 import com.earthsway.game.net.GameServer;
 
@@ -23,7 +23,7 @@ public class Packet02Move extends Packet{
         }
         catch (ArrayIndexOutOfBoundsException e){
             Packet01Disconnect packet = new Packet01Disconnect(dataArray[0]);
-            packet.writeData(Main.main.socketClient);
+            packet.writeData(Game.main.socketClient);
         }
     }
 

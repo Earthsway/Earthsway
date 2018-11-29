@@ -7,14 +7,17 @@ import com.earthsway.Utilities;
 import com.earthsway.game.entities.Player;
 import com.earthsway.game.entities.PlayerMP;
 import com.earthsway.game.entities.Worker;
+import com.earthsway.game.gfx.Assets;
+import com.earthsway.game.gfx.GameCamera;
 import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Hud;
-import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.gfx.SpriteSheet;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.net.GameClient;
 import com.earthsway.game.net.GameServer;
 import com.earthsway.game.net.packets.Packet00Login;
+import com.earthsway.game.utilities.Managers.KeyManager;
+import com.earthsway.game.utilities.Managers.MouseManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,13 +25,13 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-public class Main extends Canvas implements Runnable{
+public class Game extends Canvas implements Runnable{
 
     public static final int WIDTH = 400;//400
     public static final int HEIGHT = WIDTH/17*9;
     public static final int SCALE = 4;//4
     public static final String NAME = "Earthsway";
-    public static Main main;
+    public static Game main;
     public static final Dimension DIMENSIONS = new Dimension(WIDTH*SCALE, HEIGHT*SCALE);
 
 
@@ -42,7 +45,6 @@ public class Main extends Canvas implements Runnable{
     private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     private int[] colors = new int[6*6*6];
 
-    public Screen screen;
     public InputHandler input;
     public WindowHandler windowHandler;
     public Level level;
@@ -58,9 +60,23 @@ public class Main extends Canvas implements Runnable{
     public static DiscordRichPresence presence = new DiscordRichPresence();
     private static DiscordRichPresence lastSentPresence = null;
 
+    //States
+    public State gameState;
+    public State menuState;
+
+    //Input
+    private KeyManager keyManager;
+    private MouseManager mouseManager;
+
+    //Camera
+    private GameCamera gameCamera;
+
+    //Handler
+    private Handler handler;
+
     public void init(){
         main = this;
-        int index = 0;
+        /*int index = 0;
         for(int r = 0; r<6;r++) {
             for (int g = 0; g < 6; g++) {
                 for (int b = 0; b < 6; b++) {
@@ -71,9 +87,9 @@ public class Main extends Canvas implements Runnable{
                     colors[index++] = rr << 16 | gg << 8 | bb;
                 }
             }
-        }
-
-        screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
+        }*/
+        Assets.init(new SpriteSheet("/sprite_sheet.png", 16));
+       // screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png", 16));
         input = new InputHandler(this);
         level = new Level("/levels/small_test_level.png");
 
@@ -97,6 +113,14 @@ public class Main extends Canvas implements Runnable{
         //socketClient.sendData("ping".getBytes());
         loginPacket.writeData(socketClient);
         new Sound(SoundType.MAIN_MENU, 0f);
+
+        handler = new Handler(this);
+        gameCamera = new GameCamera(handler, 0, 0);
+
+        gameState = new GameState(handler);
+        menuState = new MenuState(handler);
+        State.setState(menuState);
+
     }
 
     private void initSounds() {
@@ -114,6 +138,8 @@ public class Main extends Canvas implements Runnable{
 
     private boolean loadRecommendedSettings = false;
     public synchronized void start() {
+        keyManager = new KeyManager();
+        mouseManager = new MouseManager();
         running = true;
         thread = new Thread(this, NAME + "_main");
         thread.start();
@@ -213,7 +239,7 @@ public class Main extends Canvas implements Runnable{
 
         new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
-                if(Main.lastSentPresence != presence) Main.discordRPC.Discord_UpdatePresence(Main.presence);
+                if(Game.lastSentPresence != presence) Game.discordRPC.Discord_UpdatePresence(Game.presence);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ignored) {
@@ -233,7 +259,12 @@ public class Main extends Canvas implements Runnable{
     public void tick(){
         tickCount++;
         level.tick();
+        keyManager.tick();
+        if(State.getState() != null)
+            State.getState().tick();
     }
+
+    private Graphics g;
 
     public void render() {
         BufferStrategy bs = getBufferStrategy();
@@ -241,10 +272,11 @@ public class Main extends Canvas implements Runnable{
             createBufferStrategy(4);//The Higher, the more power needed! def: 3
             return;
         }
-        int xOffset = player.x - (screen.width/2);
-        int yOffset = player.y - (screen.height/2);
+        g = bs.getDrawGraphics();
+        //int xOffset = player.x - (screen.width/2);
+        //int yOffset = player.y - (screen.height/2);
 
-        level.renderTiles(screen,xOffset, yOffset);
+        level.renderTiles();
 
         /*for(int x=0; x<level.width;x++){
             int color = Colors.get(-1,-1,-1,000);
@@ -254,25 +286,28 @@ public class Main extends Canvas implements Runnable{
             Font.render((x%10)+"", screen, (x*8),0, color);
         }*/
 
-        level.renderEntities(screen);
+        level.renderEntities();
 
         //Font.render("COLOR", screen, screen.xOffset + screen.width/2,screen.yOffset + screen.height/2,Colors.get(-1, -1, -1, 000), 1,  true);
 
-        for(int y = 0; y<screen.height; y++) {
+        /*for(int y = 0; y<screen.height; y++) {
             for (int x = 0; x < screen.width; x++) {
                 int colorCode = screen.pixels[x+y * screen.width];
                 if(colorCode < 255) pixels[x+y*WIDTH] = colors[colorCode];
             }
-        }
-        Graphics graphics;
-        graphics = bs.getDrawGraphics();
-        graphics.drawRect(0,0,getWidth(),getHeight());
-        graphics.drawImage(image, 0,0, getWidth(), getHeight(), null);
+        }*/
 
-        new Hud(graphics);
+        //graphics.drawRect(0,0,getWidth(),getHeight());
+        //graphics.drawImage(image, 0,0, getWidth(), getHeight(), null);
 
-        graphics.dispose();
+        new Hud(g);
+
+        g.clearRect(0, 0, width, height);
+        if(State.getState() != null)
+            State.getState().render(g);
+
         bs.show();
+        g.dispose();
     }
 
     public void debug(DebugLevel level, String msg){
@@ -318,5 +353,15 @@ public class Main extends Canvas implements Runnable{
         WARNING,
         SEVERE
     }
+    public KeyManager getKeyManager(){
+        return keyManager;
+    }
 
+    public MouseManager getMouseManager(){
+        return mouseManager;
+    }
+
+    public GameCamera getGameCamera(){
+        return gameCamera;
+    }
 }

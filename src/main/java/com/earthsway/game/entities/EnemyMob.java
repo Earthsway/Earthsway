@@ -7,6 +7,8 @@ import com.earthsway.game.utilities.EntityType;
 import com.earthsway.game.utilities.Health;
 import com.earthsway.game.utilities.Shield;
 
+import java.awt.*;
+
 public abstract class EnemyMob extends Mob {
     public EnemyMob(Level level, String name, int x, int y, int[] collisionBox, Coords respawnCoords, int speed, boolean canMoveDiagonal,
                     int scale, Health health, Shield shield, boolean respawnWithShield, boolean damageable, double hitCooldown, boolean canSwim, EntityType entityType,
@@ -21,7 +23,7 @@ public abstract class EnemyMob extends Mob {
     }
 
     @Override
-    public void render(Screen screen) {
+    public void render(Graphics g) {
 
     }
 }

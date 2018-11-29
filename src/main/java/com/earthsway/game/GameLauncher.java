@@ -1,22 +1,20 @@
 package com.earthsway.game;
 
-import com.earthsway.game.utilities.Sound;
-
 import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
 
 @SuppressWarnings({"serial", "all"})
 public class GameLauncher extends Applet {
-    private static Main main = new Main();
+    private static Game main = new Game();
 
     @Override
     public void init(){
         setLayout(new BorderLayout());
         add(main, BorderLayout.CENTER);
-        setMaximumSize(Main.DIMENSIONS);
-        setMinimumSize(Main.DIMENSIONS);
-        setPreferredSize(Main.DIMENSIONS);
+        setMaximumSize(Game.DIMENSIONS);
+        setMinimumSize(Game.DIMENSIONS);
+        setPreferredSize(Game.DIMENSIONS);
     }
 
     @Override

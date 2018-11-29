@@ -1,12 +1,12 @@
 package com.earthsway.game.entities;
 
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Colors;
-import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.level.Node;
 
+import java.awt.*;
 import java.util.List;
 
 public class Worker extends Mob {
@@ -31,13 +31,13 @@ public class Worker extends Mob {
         //this.xa = movement[0];
         //this.ya = movement[1];
         if (followPlayer) {
-            followMovementAI(this.x, this.y, Main.main.player.x, Main.main.player.y, xa, ya, this.speed, this, path, time);
+            followMovementAI(this.x, this.y, Game.main.player.x, Game.main.player.y, xa, ya, this.speed, this, path, time);
             moveMob(xa, ya, this);
         }
         super.tick();
     }
 
-    public void render(Screen screen) {
+    public void render(Graphics g) {
         time++;
         int xTile = 0;
         int yTile = 25;

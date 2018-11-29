@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
 
-    public InputHandler(Main main){
+    public InputHandler(Game main){
         main.addKeyListener(this);
     }
 

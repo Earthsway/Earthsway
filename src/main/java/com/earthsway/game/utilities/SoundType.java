@@ -1,6 +1,6 @@
 package com.earthsway.game.utilities;
 
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 
 import java.net.URL;
 
@@ -26,7 +26,7 @@ public enum SoundType {
     }
     public boolean shouldInit(){return init;}
     public boolean shouldLoop(){return loop;}
-    public URL getAsResource(int index) {return Main.class.getResource(sounds[index]);}
+    public URL getAsResource(int index) {return Game.class.getResource(sounds[index]);}
     public String[] getSounds() {return sounds;}
 
     public String getSound(int index) {return getSounds()[index +-1];}

@@ -1,6 +1,6 @@
 package com.earthsway.game.gfx;
 
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 import com.earthsway.game.entities.Player;
 
 import java.awt.*;
@@ -11,7 +11,7 @@ public class Hud {
 
     public Hud(Graphics graphics){
         this.graphics = graphics;
-        this.player = Main.main.player;
+        this.player = Game.main.player;
         healthBar();
         shieldBar();
     }

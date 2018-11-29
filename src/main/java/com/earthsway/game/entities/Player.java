@@ -1,15 +1,17 @@
 package com.earthsway.game.entities;
 
 import com.earthsway.game.InputHandler;
-import com.earthsway.game.Main;
+import com.earthsway.game.Game;
 import com.earthsway.game.level.tiles.Tile;
 import com.earthsway.game.utilities.*;
 import com.earthsway.game.gfx.Colors;
 import com.earthsway.game.gfx.Font;
-import com.earthsway.game.gfx.Screen;
 import com.earthsway.game.level.Level;
 import com.earthsway.game.net.packets.Packet02Move;
 
+import java.awt.*;
+
+@SuppressWarnings("ALL")
 public class Player extends Mob{
 
     private InputHandler input;
@@ -31,14 +33,14 @@ public class Player extends Mob{
         int ya = 0;
         if(input != null) {
             if(this.canMoveDiagonal){
-            if(input.F3.isPressed()) Main.main.toggleDebug();
+            if(input.F3.isPressed()) Game.main.toggleDebug();
             if (input.up.isPressed()) ya--;
             if (input.down.isPressed()) ya++;
             if (input.left.isPressed()) xa--;
             if (input.right.isPressed()) xa++;
             }
             else{
-                if(input.F3.isPressed()) Main.main.toggleDebug();
+                if(input.F3.isPressed()) Game.main.toggleDebug();
                 if (input.up.isPressed()) ya--;
                 else if (input.down.isPressed()) ya++;
                 else if (input.left.isPressed()) xa--;
@@ -49,7 +51,7 @@ public class Player extends Mob{
             move(xa,ya);
             isMoving = true;
             Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
-            packet.writeData(Main.main.socketClient);
+            packet.writeData(Game.main.socketClient);
         }else isMoving = false;
 
         if(this.health.getCurrentHealth() <= this.health.getMinHealth()) {
@@ -85,12 +87,12 @@ public class Player extends Mob{
     protected void respawn() {
         super.respawn();
         Packet02Move packet = new Packet02Move(this.getUsername(), this.x, this.y, this.numSteps, this.isMoving, this.movingDir);
-        packet.writeData(Main.main.socketClient);
+        packet.writeData(Game.main.socketClient);
     }
 
     private void sendDiscordData() {
-        if (this.shield.getCurrentShield() <= 0) Main.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth();
-        else Main.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth() + " | "
+        if (this.shield.getCurrentShield() <= 0) Game.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth();
+        else Game.presence.details = "Health: " + this.health.getCurrentHealth() + "/" + this.health.getMaxHealth() + " | "
                     + "Shield: " + this.shield.getCurrentShield() + "/" + this.shield.getMaxShield();
         /*int multiplayerAmount = 0;
         for(EntityType et : this.level.getEntityTypes()){
@@ -108,7 +110,7 @@ public class Player extends Mob{
         }*/
     }
 
-    public void render(Screen screen) {
+    public void render(Graphics g) {
         /** xTile & yTile are used to define the top left tile of the defined sprite.*/
         int xTile = 0;
         int yTile = 27;
@@ -128,7 +130,7 @@ public class Player extends Mob{
         int xOffset = x - modifier/2;
         int yOffset = y - modifier/2 - 4;
 
-        this.renderWaterSplash(screen, xOffset, yOffset, modifier,flipTop, flipBottom,xTile,yTile, color);
+        this.renderWaterSplash(g, xOffset, yOffset, modifier,flipTop, flipBottom,xTile,yTile, color);
 
         screen.render(xOffset + (modifier* flipTop), yOffset, xTile + yTile*32, color, flipTop, scale);
         screen.render(xOffset + modifier - (modifier* flipTop), yOffset, (xTile + 1) + yTile*32, color,flipTop, scale);
