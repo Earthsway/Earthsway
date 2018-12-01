@@ -264,7 +264,7 @@ public class Game extends Canvas implements Runnable{
             State.getState().tick();
     }
 
-    private Graphics g;
+    public Graphics g;
 
     public void render() {
         BufferStrategy bs = getBufferStrategy();

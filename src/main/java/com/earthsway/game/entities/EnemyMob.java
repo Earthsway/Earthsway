@@ -23,7 +23,7 @@ public abstract class EnemyMob extends Mob {
     }
 
     @Override
-    public void render(Graphics g) {
+    public void render() {
 
     }
 }

@@ -21,7 +21,7 @@ public abstract class Entity {
     }
 
     public abstract void tick();
-    public abstract void render(Graphics g);
+    public abstract void render();
 
     public EntityType getEntityType() {return entityType;}
 }

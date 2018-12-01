@@ -236,8 +236,9 @@ public abstract class Mob extends Entity{
 
     protected void renderWaterSplash(Graphics g, int xOffset, int yOffset, int modifier, int flipTop, int flipBottom, int xTile, int yTile, int color){
         if(this.swimming){
-            screen.render(xOffset + this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x00, this.scale);
-            screen.render(xOffset + 8 * this.scale, yOffset + 3, 31 + 31 * 32, waterColor, 0x01, this.scale);
+            Screen.render();
+            screen.render(xOffset + this.scale, yOffset + 3, 31 + 31 * 32, 0x00, this.scale);
+            screen.render(xOffset + 8 * this.scale, yOffset + 3, 31 + 31 * 32, 0x01, this.scale);
         }
 
         if(!this.swimming){

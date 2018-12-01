@@ -122,9 +122,9 @@ public class Level {
         }
     }
 
-    public void renderEntities(Screen screen){
+    public void renderEntities(){
         for(Entity e : getEntities()){
-            e.render(screen);
+            e.render();
         }
     }
 
