@@ -2,59 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14afde40-902b-4011-b90b-06d5cea8c34e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/GameLauncher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Handler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/InputHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/WindowHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/PlayerMP.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Worker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Assets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Colors.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Font.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/GameCamera.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Hud.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java.OLD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java.OLD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Node.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/AnimatedTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BaseTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicDamagingTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicSolidDamagingTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicSolidTile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/Tile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/GameClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/GameServer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet00Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet01Disconnect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet02Move.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Biome.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Coords.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Health.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/KeyManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/MouseManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/MovingDirection.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Shield.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Vector2i.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/small_test_level - Copy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/small_test_level.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprite_sheet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/levels/small_test_level - Copy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/levels/small_test_level.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sprite_sheet.png" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -86,10 +34,9 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+            <state relative-caret-position="170">
+              <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="e#2842#2843#0" expanded="true" />
                 <element signature="e#2869#2870#0" expanded="true" />
               </folding>
@@ -202,8 +149,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" />
       </list>
     </option>
   </component>
@@ -449,12 +396,12 @@
       <workItem from="1543450068263" duration="5736000" />
       <workItem from="1543535700743" duration="1010000" />
       <workItem from="1543631310475" duration="1009000" />
-      <workItem from="1543632338662" duration="1220000" />
+      <workItem from="1543632338662" duration="1737000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8975000" />
+    <option name="totallyTimeSpent" value="9492000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -467,16 +414,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5867508" visible="true" weight="0.22068231" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5867508" visible="true" weight="0.22068231" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="Favorites" order="5" sideWeight="0.5013477" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Floobits" order="1" />
+      <window_info active="true" anchor="bottom" id="Floobits" order="1" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Database Changes" order="3" />
       <window_info anchor="bottom" id="Find" order="4" weight="0.329718" />
@@ -916,10 +862,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+        <state relative-caret-position="170">
+          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="e#2842#2843#0" expanded="true" />
             <element signature="e#2869#2870#0" expanded="true" />
           </folding>

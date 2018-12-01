@@ -3,24 +3,12 @@ package com.earthsway.game;
 import club.minnced.discord.rpc.DiscordEventHandlers;
 import club.minnced.discord.rpc.DiscordRPC;
 import club.minnced.discord.rpc.DiscordRichPresence;
-import com.earthsway.game.entities.Player;
-import com.earthsway.game.entities.PlayerMP;
-import com.earthsway.game.gfx.Assets;
-import com.earthsway.game.gfx.GameCamera;
-import com.earthsway.game.utilities.*;
-import com.earthsway.game.gfx.Hud;
-import com.earthsway.game.gfx.SpriteSheet;
-import com.earthsway.game.level.Level;
-import com.earthsway.game.net.GameClient;
-import com.earthsway.game.net.GameServer;
-import com.earthsway.game.net.packets.Packet00Login;
-import com.earthsway.game.utilities.Managers.KeyManager;
-import com.earthsway.game.utilities.Managers.MouseManager;
+import com.earthsway.game.utilities.DiscordData;
+import com.earthsway.game.utilities.Sound;
+import com.earthsway.game.utilities.SoundType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferInt;
 
 public class Game extends Canvas implements Runnable{
 
@@ -37,18 +25,6 @@ public class Game extends Canvas implements Runnable{
     public JFrame frame;
     public boolean running = false;
     public int tickCount = 0;
-
-    private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-    private int pixels[] = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-    private int[] colors = new int[6*6*6];
-
-    public InputHandler input;
-    public WindowHandler windowHandler;
-    public Level level;
-    public Player player;
-
-    public GameClient socketClient;
-    public GameServer socketServer;
 
     public boolean debugMode = true;
 
@@ -73,8 +49,6 @@ public static void main(String[] args){
         main.frame.setResizable(false);
         main.frame.setLocationRelativeTo(null);
         main.frame.setVisible(true);
-
-        main.windowHandler = new WindowHandler(main);
 
         main.start();
     }
