@@ -4,3 +4,7 @@ tmp
 vendor
 .idea/workspace.xml
 .idea/misc.xml
+/target/maven-status/
+/target/generated-sources/
+/target/maven-archiver/
+/target/classes/

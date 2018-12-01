@@ -1,6 +1,9 @@
 package com.earthsway;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Utilities {
     public static void errorReport(Exception e, Class clas){
@@ -12,6 +15,17 @@ public class Utilities {
     public static Thread getThreadByName(String threadName) {
         for (Thread t : Thread.getAllStackTraces().keySet()) {
             if (t.getName().equals(threadName)) return t;
+        }
+        return null;
+    }
+
+    public static BufferedImage loadTexture(String name){
+        try {
+            return ImageIO.read(Utilities.class.getResource("/textures/" + name + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            errorReport(e, Utilities.class);
+            System.exit(1);
         }
         return null;
     }
