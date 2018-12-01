@@ -53,26 +53,34 @@ public class Game extends Canvas implements Runnable{
     public GameClient socketClient;
     public GameServer socketServer;
 
-    public boolean debugMode = false;
+    public boolean debugMode = true;
 
     public static DiscordRPC discordRPC = DiscordRPC.INSTANCE;
     public static DiscordData discordUser = null;
     public static DiscordRichPresence presence = new DiscordRichPresence();
     private static DiscordRichPresence lastSentPresence = null;
 
-    //States
-    public State gameState;
-    public State menuState;
+public static void main(String[] args){
+        main.setMinimumSize(main.DIMENSIONS);
+        main.setMaximumSize(main.DIMENSIONS);
+        main.setPreferredSize(main.DIMENSIONS);
 
-    //Input
-    private KeyManager keyManager;
-    private MouseManager mouseManager;
+        main.frame = new JFrame(main.NAME);
 
-    //Camera
-    private GameCamera gameCamera;
+        main.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        main.frame.setLayout(new BorderLayout());
 
-    //Handler
-    private Handler handler;
+        main.frame.add(main, BorderLayout.CENTER);
+        main.frame.pack();
+
+        main.frame.setResizable(false);
+        main.frame.setLocationRelativeTo(null);
+        main.frame.setVisible(true);
+
+        main.windowHandler = new WindowHandler(main);
+
+        main.start();
+    }
 
     public void init(){
         main = this;
@@ -264,7 +272,7 @@ public class Game extends Canvas implements Runnable{
             State.getState().tick();
     }
 
-    public Graphics g;
+    private Graphics g;
 
     public void render() {
         BufferStrategy bs = getBufferStrategy();
