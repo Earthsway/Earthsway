@@ -1,10 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java.OLD" line="10" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="14afde40-902b-4011-b90b-06d5cea8c34e" name="Default Changelist" comment="" />
+    <list default="true" id="14afde40-902b-4011-b90b-06d5cea8c34e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/GameLauncher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/Handler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/InputHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/WindowHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/PlayerMP.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Worker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Assets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Colors.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Font.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/GameCamera.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Hud.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java.OLD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java.OLD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Node.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/AnimatedTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BaseTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicDamagingTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicSolidDamagingTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicSolidTile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/Tile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/GameClient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/GameServer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet00Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet01Disconnect.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/net/packets/Packet02Move.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Biome.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Coords.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Health.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/KeyManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/MouseManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/MovingDirection.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Shield.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/State.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Vector2i.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/small_test_level - Copy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/small_test_level.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sprite_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/levels/small_test_level - Copy.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/levels/small_test_level.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sprite_sheet.png" beforeDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,130 +83,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4131">
-              <caret line="266" column="11" selection-start-line="266" selection-start-column="11" selection-end-line="266" selection-end-column="11" />
+            <state relative-caret-position="314">
+              <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="239" column="80" selection-start-line="239" selection-start-column="80" selection-end-line="239" selection-end-column="80" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#2842#2843#0" expanded="true" />
+                <element signature="e#2869#2870#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1853">
-              <caret line="126" column="14" selection-start-line="126" selection-start-column="14" selection-end-line="126" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java.OLD">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="51" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/State.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIObject.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1020">
-              <caret line="82" selection-start-line="82" selection-end-line="82" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#970#971#0" expanded="true" />
-                <element signature="e#994#995#0" expanded="true" />
-                <element signature="e#1027#1028#0" expanded="true" />
-                <element signature="e#1053#1054#0" expanded="true" />
-                <element signature="e#1080#1081#0" expanded="true" />
-                <element signature="e#1104#1105#0" expanded="true" />
-                <element signature="e#1137#1138#0" expanded="true" />
-                <element signature="e#1163#1164#0" expanded="true" />
-                <element signature="e#1192#1193#0" expanded="true" />
-                <element signature="e#1220#1221#0" expanded="true" />
-                <element signature="e#1259#1260#0" expanded="true" />
-                <element signature="e#1293#1294#0" expanded="true" />
-                <element signature="e#1323#1324#0" expanded="true" />
-                <element signature="e#1352#1353#0" expanded="true" />
-                <element signature="e#1393#1394#0" expanded="true" />
-                <element signature="e#1429#1430#0" expanded="true" />
-                <element signature="e#1464#1465#0" expanded="true" />
-                <element signature="e#1495#1496#0" expanded="true" />
-                <element signature="e#1544#1545#0" expanded="true" />
-                <element signature="e#1584#1585#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="102">
+              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
             </state>
           </provider>
         </entry>
@@ -234,7 +180,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Sound.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/SoundType.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/PlayerMP.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/SpriteSheet.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/tiles/BasicSolidTile.java" />
@@ -252,12 +197,13 @@
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/State.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/Handler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java" />
       </list>
     </option>
   </component>
@@ -354,59 +300,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="earthsway" type="462c0819:PsiDirectoryNode" />
               <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="gfx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="level" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="level" type="462c0819:PsiDirectoryNode" />
-              <item name="tiles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
               <item name="utilities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="earthsway" type="462c0819:PsiDirectoryNode" />
-              <item name="game" type="462c0819:PsiDirectoryNode" />
-              <item name="utilities" type="462c0819:PsiDirectoryNode" />
-              <item name="Managers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Earthsway" type="b2602c69:ProjectViewProjectNode" />
@@ -554,12 +448,13 @@
       <updated>1531697293000</updated>
       <workItem from="1543450068263" duration="5736000" />
       <workItem from="1543535700743" duration="1010000" />
-      <workItem from="1543631310475" duration="408000" />
+      <workItem from="1543631310475" duration="1009000" />
+      <workItem from="1543632338662" duration="1220000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7154000" />
+    <option name="totallyTimeSpent" value="8975000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -574,7 +469,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5867508" visible="true" weight="0.2185501" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.5867508" visible="true" weight="0.22068231" />
       <window_info id="Image Layers" order="1" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -738,13 +633,6 @@
       </provider>
       <provider editor-type-id="MavenHelperPluginDependencyAnalyzer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Hud.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -811,20 +699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="73" selection-start-line="7" selection-start-column="73" selection-end-line="7" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="133" column="25" lean-forward="true" selection-start-line="133" selection-start-column="25" selection-end-line="133" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Worker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="58" column="36" selection-start-line="58" selection-start-column="36" selection-end-line="58" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -921,26 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4131">
-          <caret line="266" column="11" selection-start-line="266" selection-start-column="11" selection-end-line="266" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/level/Level.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1853">
@@ -948,17 +802,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/gfx/Screen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        <state relative-caret-position="68">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -971,7 +818,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
+        <state relative-caret-position="102">
           <caret line="6" column="34" selection-start-line="6" selection-start-column="34" selection-end-line="6" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -981,7 +828,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/State.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
+        <state relative-caret-position="340">
           <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -991,7 +838,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/Managers/UIObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1020">
+        <state relative-caret-position="1394">
           <caret line="82" selection-start-line="82" selection-end-line="82" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1019,12 +866,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Worker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="723">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="781">
+          <caret line="144" column="51" lean-forward="true" selection-start-line="144" selection-start-column="51" selection-end-line="144" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Mob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="239" column="80" selection-start-line="239" selection-start-column="80" selection-end-line="239" selection-end-column="80" />
+        <state relative-caret-position="196">
+          <caret line="212" column="25" selection-start-line="212" selection-start-column="25" selection-end-line="212" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="23" column="25" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/entities/EnemyMob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/utilities/EntityType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/earthsway/game/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="76" column="44" lean-forward="true" selection-start-line="76" selection-start-column="44" selection-end-line="76" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2842#2843#0" expanded="true" />
+            <element signature="e#2869#2870#0" expanded="true" />
           </folding>
         </state>
       </provider>
