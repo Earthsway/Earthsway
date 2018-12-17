@@ -1,9 +1,16 @@
 package com.earthsway;
 
+import com.sun.istack.internal.NotNull;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
+import java.awt.image.ColorModel;
 import java.io.IOException;
+import java.nio.Buffer;
 
 public class Utilities {
     public static void errorReport(Exception e, Class clas){
@@ -28,5 +35,24 @@ public class Utilities {
             System.exit(1);
         }
         return null;
+    }
+
+    public static BufferedImage scaleNearest(BufferedImage before, double scale) {
+        final int interpolation = AffineTransformOp.TYPE_NEAREST_NEIGHBOR;
+        return scale(before, scale, interpolation);
+    }
+
+    @NotNull
+    private static
+    BufferedImage scale(final BufferedImage before, final double scale, final int type) {
+        int w = before.getWidth();
+        int h = before.getHeight();
+        int w2 = (int) (w * scale);
+        int h2 = (int) (h * scale);
+        BufferedImage after = new BufferedImage(w2, h2, before.getType());
+        AffineTransform scaleInstance = AffineTransform.getScaleInstance(scale, scale);
+        AffineTransformOp scaleOp = new AffineTransformOp(scaleInstance, type);
+        scaleOp.filter(before, after);
+        return after;
     }
 }

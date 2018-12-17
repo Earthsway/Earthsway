@@ -1,6 +1,7 @@
 package com.earthsway.game;
 
 import com.earthsway.Utilities;
+import com.earthsway.game.gfx.SpriteSheet;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -17,6 +18,8 @@ public class Game implements Runnable{
 
     private BufferStrategy bs;
     private Graphics g;
+    private SpriteSheet sheet;
+
 
     public Game(String title, int width, int height){
         this.width = width;
@@ -27,7 +30,8 @@ public class Game implements Runnable{
     private BufferedImage testImage;
     private void init(){
         display = new Display(title, width, height);
-        testImage = Utilities.loadTexture("test");
+        testImage = Utilities.loadTexture("sheet");
+        sheet = new SpriteSheet (testImage);
     }
 
     private void tick(){
@@ -40,7 +44,7 @@ public class Game implements Runnable{
         g = bs.getDrawGraphics();
         g.clearRect(0,0, width, height);
 
-        g.drawImage(testImage, 0,0,null);
+        g.drawImage(Utilities.scaleNearest(sheet.crop(85, 176, 17, 57), 5), 5,5,null);
 
         bs.show();
         g.dispose();
